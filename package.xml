@@ -17,7 +17,7 @@
   <email>mike@maintainable.com</email>
   <active>yes</active>
  </lead>
- <date>2016-02-02</date>
+ <date>2017-10-17</date>
  <version>
   <release>2.0.7</release>
   <api>1.1.0</api>
@@ -39,7 +39,6 @@
        <file name="template.php" role="doc" />
        <file name="view.php" role="doc" />
       </dir> <!-- /doc/Horde/View/examples -->
-      <file name="COPYING" role="doc" />
       <file name="TODO.txt" role="doc" />
      </dir> <!-- /doc/Horde/View -->
     </dir> <!-- /doc/Horde -->
@@ -125,6 +124,7 @@
      </dir> <!-- /test/Horde/View -->
     </dir> <!-- /test/Horde -->
    </dir> <!-- /test -->
+   <file name="LICENSE" role="doc" />
   </dir> <!-- / -->
  </contents>
  <dependencies>
@@ -188,40 +188,39 @@
  </dependencies>
  <phprelease>
   <filelist>
-   <install as="COPYING" name="doc/Horde/View/COPYING" />
-   <install as="TODO.txt" name="doc/Horde/View/TODO.txt" />
    <install as="examples/template.php" name="doc/Horde/View/examples/template.php" />
    <install as="examples/view.php" name="doc/Horde/View/examples/view.php" />
+   <install as="TODO.txt" name="doc/Horde/View/TODO.txt" />
    <install as="Horde/View.php" name="lib/Horde/View.php" />
    <install as="Horde/View/Base.php" name="lib/Horde/View/Base.php" />
    <install as="Horde/View/Exception.php" name="lib/Horde/View/Exception.php" />
-   <install as="Horde/View/Interface.php" name="lib/Horde/View/Interface.php" />
-   <install as="Horde/View/Json.php" name="lib/Horde/View/Json.php" />
    <install as="Horde/View/Helper/Base.php" name="lib/Horde/View/Helper/Base.php" />
    <install as="Horde/View/Helper/Benchmark.php" name="lib/Horde/View/Helper/Benchmark.php" />
+   <install as="Horde/View/Helper/Benchmark/Timer.php" name="lib/Horde/View/Helper/Benchmark/Timer.php" />
    <install as="Horde/View/Helper/Block.php" name="lib/Horde/View/Helper/Block.php" />
    <install as="Horde/View/Helper/Capture.php" name="lib/Horde/View/Helper/Capture.php" />
+   <install as="Horde/View/Helper/Capture/Base.php" name="lib/Horde/View/Helper/Capture/Base.php" />
+   <install as="Horde/View/Helper/Capture/ContentFor.php" name="lib/Horde/View/Helper/Capture/ContentFor.php" />
    <install as="Horde/View/Helper/Date.php" name="lib/Horde/View/Helper/Date.php" />
    <install as="Horde/View/Helper/Debug.php" name="lib/Horde/View/Helper/Debug.php" />
    <install as="Horde/View/Helper/Form.php" name="lib/Horde/View/Helper/Form.php" />
+   <install as="Horde/View/Helper/Form/Builder.php" name="lib/Horde/View/Helper/Form/Builder.php" />
+   <install as="Horde/View/Helper/Form/InstanceTag/Base.php" name="lib/Horde/View/Helper/Form/InstanceTag/Base.php" />
+   <install as="Horde/View/Helper/Form/InstanceTag/Form.php" name="lib/Horde/View/Helper/Form/InstanceTag/Form.php" />
    <install as="Horde/View/Helper/FormTag.php" name="lib/Horde/View/Helper/FormTag.php" />
    <install as="Horde/View/Helper/Javascript.php" name="lib/Horde/View/Helper/Javascript.php" />
    <install as="Horde/View/Helper/Number.php" name="lib/Horde/View/Helper/Number.php" />
    <install as="Horde/View/Helper/Tag.php" name="lib/Horde/View/Helper/Tag.php" />
    <install as="Horde/View/Helper/Text.php" name="lib/Horde/View/Helper/Text.php" />
-   <install as="Horde/View/Helper/Url.php" name="lib/Horde/View/Helper/Url.php" />
-   <install as="Horde/View/Helper/Benchmark/Timer.php" name="lib/Horde/View/Helper/Benchmark/Timer.php" />
-   <install as="Horde/View/Helper/Capture/Base.php" name="lib/Horde/View/Helper/Capture/Base.php" />
-   <install as="Horde/View/Helper/Capture/ContentFor.php" name="lib/Horde/View/Helper/Capture/ContentFor.php" />
-   <install as="Horde/View/Helper/Form/Builder.php" name="lib/Horde/View/Helper/Form/Builder.php" />
-   <install as="Horde/View/Helper/Form/InstanceTag/Base.php" name="lib/Horde/View/Helper/Form/InstanceTag/Base.php" />
-   <install as="Horde/View/Helper/Form/InstanceTag/Form.php" name="lib/Horde/View/Helper/Form/InstanceTag/Form.php" />
    <install as="Horde/View/Helper/Text/Cycle.php" name="lib/Horde/View/Helper/Text/Cycle.php" />
+   <install as="Horde/View/Helper/Url.php" name="lib/Horde/View/Helper/Url.php" />
+   <install as="Horde/View/Interface.php" name="lib/Horde/View/Interface.php" />
+   <install as="Horde/View/Json.php" name="lib/Horde/View/Json.php" />
+   <install as="LICENSE" name="LICENSE" />
    <install as="Horde/View/AllTests.php" name="test/Horde/View/AllTests.php" />
    <install as="Horde/View/BaseTest.php" name="test/Horde/View/BaseTest.php" />
    <install as="Horde/View/bootstrap.php" name="test/Horde/View/bootstrap.php" />
-   <install as="Horde/View/InterfaceTest.php" name="test/Horde/View/InterfaceTest.php" />
-   <install as="Horde/View/phpunit.xml" name="test/Horde/View/phpunit.xml" />
+   <install as="Horde/View/fixtures/subdir/testRender.html.php" name="test/Horde/View/fixtures/subdir/testRender.html.php" />
    <install as="Horde/View/fixtures/testEscape.html.php" name="test/Horde/View/fixtures/testEscape.html.php" />
    <install as="Horde/View/fixtures/testPartial.html.php" name="test/Horde/View/fixtures/testPartial.html.php" />
    <install as="Horde/View/fixtures/testPartialCollection.html.php" name="test/Horde/View/fixtures/testPartialCollection.html.php" />
@@ -231,7 +230,6 @@
    <install as="Horde/View/fixtures/_myPartial.html.php" name="test/Horde/View/fixtures/_myPartial.html.php" />
    <install as="Horde/View/fixtures/_myPartialLocals.html.php" name="test/Horde/View/fixtures/_myPartialLocals.html.php" />
    <install as="Horde/View/fixtures/_myPartialObject.html.php" name="test/Horde/View/fixtures/_myPartialObject.html.php" />
-   <install as="Horde/View/fixtures/subdir/testRender.html.php" name="test/Horde/View/fixtures/subdir/testRender.html.php" />
    <install as="Horde/View/Helper/BenchmarkTest.php" name="test/Horde/View/Helper/BenchmarkTest.php" />
    <install as="Horde/View/Helper/CaptureTest.php" name="test/Horde/View/Helper/CaptureTest.php" />
    <install as="Horde/View/Helper/DateTest.php" name="test/Horde/View/Helper/DateTest.php" />
@@ -243,6 +241,8 @@
    <install as="Horde/View/Helper/TagTest.php" name="test/Horde/View/Helper/TagTest.php" />
    <install as="Horde/View/Helper/TextTest.php" name="test/Horde/View/Helper/TextTest.php" />
    <install as="Horde/View/Helper/UrlTest.php" name="test/Horde/View/Helper/UrlTest.php" />
+   <install as="Horde/View/InterfaceTest.php" name="test/Horde/View/InterfaceTest.php" />
+   <install as="Horde/View/phpunit.xml" name="test/Horde/View/phpunit.xml" />
   </filelist>
  </phprelease>
  <changelog>
@@ -475,7 +475,7 @@
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2016-02-02</date>
+   <date>2017-10-17</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
 * 
