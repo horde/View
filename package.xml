@@ -17,7 +17,7 @@
   <email>mike@maintainable.com</email>
   <active>yes</active>
  </lead>
- <date>2017-10-17</date>
+ <date>2017-10-20</date>
  <version>
   <release>2.0.7</release>
   <api>1.1.0</api>
@@ -120,7 +120,6 @@
       <file name="BaseTest.php" role="test" />
       <file name="bootstrap.php" role="test" />
       <file name="InterfaceTest.php" role="test" />
-      <file name="phpunit.xml" role="test" />
      </dir> <!-- /test/Horde/View -->
     </dir> <!-- /test/Horde -->
    </dir> <!-- /test -->
@@ -242,7 +241,6 @@
    <install as="Horde/View/Helper/TextTest.php" name="test/Horde/View/Helper/TextTest.php" />
    <install as="Horde/View/Helper/UrlTest.php" name="test/Horde/View/Helper/UrlTest.php" />
    <install as="Horde/View/InterfaceTest.php" name="test/Horde/View/InterfaceTest.php" />
-   <install as="Horde/View/phpunit.xml" name="test/Horde/View/phpunit.xml" />
   </filelist>
  </phprelease>
  <changelog>
@@ -475,7 +473,7 @@
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2017-10-17</date>
+   <date>2017-10-20</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
 * 
