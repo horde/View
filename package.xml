@@ -17,7 +17,7 @@
   <email>mike@maintainable.com</email>
   <active>yes</active>
  </lead>
- <date>2017-10-20</date>
+ <date>2017-10-27</date>
  <version>
   <release>2.0.7</release>
   <api>1.1.0</api>
@@ -38,6 +38,7 @@
        <file name="template.php" role="doc" />
        <file name="view.php" role="doc" />
       </dir> <!-- /doc/Horde/View/examples -->
+      <file name="CHANGES" role="doc" />
       <file name="TODO.txt" role="doc" />
      </dir> <!-- /doc/Horde/View -->
     </dir> <!-- /doc/Horde -->
@@ -186,6 +187,7 @@
  </dependencies>
  <phprelease>
   <filelist>
+   <install as="CHANGES" name="doc/Horde/View/CHANGES" />
    <install as="examples/template.php" name="doc/Horde/View/examples/template.php" />
    <install as="examples/view.php" name="doc/Horde/View/examples/view.php" />
    <install as="TODO.txt" name="doc/Horde/View/TODO.txt" />
@@ -472,7 +474,7 @@
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2017-10-20</date>
+   <date>2017-10-27</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
    </notes>
