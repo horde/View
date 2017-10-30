@@ -1,0 +1,119 @@
+----------
+v2.0.7-git
+----------
+
+
+------
+v2.0.6
+------
+
+[jan] Mark PHP 7 as supported.
+
+
+------
+v2.0.5
+------
+
+[jan] Fix issues with certain locales like Turkish.
+
+
+------
+v2.0.4
+------
+
+[jan] Change Horde_View_Helper_Date#distanceOfTimeInWords() to not round up
+      the distance.
+[jan] Make Horde_View_Helper_Text#truncate() and truncateMiddle()
+      multibyte-safe (Bug #13163).
+
+
+------
+v2.0.3
+------
+
+[jan] Allow collections with arbitrary keys when rendering partials.
+
+
+------
+v2.0.2
+------
+
+[jan] Fix generating form tags.
+
+
+------
+v2.0.1
+------
+
+[mms] Use new Horde_Test layout.
+
+
+------
+v2.0.0
+------
+
+First stable release for Horde 5.
+
+
+-----------
+v2.0.0beta1
+-----------
+
+First beta release for Horde 5.
+
+
+------------
+v2.0.0alpha1
+------------
+
+First alpha release for Horde 5.
+[mms] Added Horde_View_Helper_FormTag#optionTag().
+
+
+------
+v1.0.1
+------
+
+[jan] Make unit tests Windows compatible.
+
+
+------
+v1.0.0
+------
+
+First stable release for Horde 4.
+
+
+---------
+v1.0.0RC2
+---------
+
+Second release candidate for Horde 4.
+
+
+---------
+v1.0.0RC1
+---------
+
+First release candidate for Horde 4.
+
+
+-----------
+v1.0.0beta1
+-----------
+
+First beta release for Horde 4.
+
+
+------------
+v1.0.0alpha1
+------------
+
+First alpha release for Horde 4.
+
+
+------
+v0.2.1
+------
+
+Better Helper architecture, improved View/Helper registration
