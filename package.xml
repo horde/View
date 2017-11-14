@@ -122,7 +122,6 @@
       <file name="BaseTest.php" role="test" />
       <file name="bootstrap.php" role="test" />
       <file name="InterfaceTest.php" role="test" />
-      <file name="phpunit.xml" role="test" />
      </dir> <!-- /test/Horde/View -->
     </dir> <!-- /test/Horde -->
    </dir> <!-- /test -->
@@ -223,7 +222,6 @@
    <install as="Horde/View/BaseTest.php" name="test/Horde/View/BaseTest.php" />
    <install as="Horde/View/bootstrap.php" name="test/Horde/View/bootstrap.php" />
    <install as="Horde/View/InterfaceTest.php" name="test/Horde/View/InterfaceTest.php" />
-   <install as="Horde/View/phpunit.xml" name="test/Horde/View/phpunit.xml" />
    <install as="Horde/View/fixtures/testEscape.html.php" name="test/Horde/View/fixtures/testEscape.html.php" />
    <install as="Horde/View/fixtures/testPartial.html.php" name="test/Horde/View/fixtures/testPartial.html.php" />
    <install as="Horde/View/fixtures/testPartialCollection.html.php" name="test/Horde/View/fixtures/testPartialCollection.html.php" />
