@@ -12,7 +12,7 @@ authors:
     user: mnaberez
     email: mike@maintainable.com
     active: true
-    role: lead
+    role: false
   -
     name: Chuck Hagenbuch
     user: chuck
