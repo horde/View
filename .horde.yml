@@ -2,7 +2,7 @@
 id: View
 name: View
 full: View pattern library
-description: A simple View pattern implementation.
+description: A library that provides a simple View pattern implementation.
 list: dev
 type: library
 homepage: https://www.horde.org/libraries/Horde_View
