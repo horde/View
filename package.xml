@@ -2,33 +2,32 @@
 <package packagerversion="1.9.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>Horde_View</name>
  <channel>pear.horde.org</channel>
- <extends>View</extends>
  <summary>View pattern library</summary>
- <description>A simple View pattern implementation.</description>
- <lead>
-  <name>Chuck Hagenbuch</name>
-  <user>chuck</user>
-  <email>chuck@horde.org</email>
-  <active>yes</active>
- </lead>
+ <description>A library that provides a simple View pattern implementation.</description>
  <lead>
   <name>Mike Naberezny</name>
   <user>mnaberez</user>
   <email>mike@maintainable.com</email>
-  <active>yes</active>
+  <active>no</active>
  </lead>
- <date>2017-11-11</date>
+ <lead>
+  <name>Chuck Hagenbuch</name>
+  <user>chuck</user>
+  <email>chuck@horde.org</email>
+  <active>no</active>
+ </lead>
+ <date>2021-02-24</date>
  <version>
-  <release>2.0.7</release>
-  <api>1.1.0</api>
+  <release>3.0.0alpha1</release>
+  <api>3.0.0alpha1</api>
  </version>
  <stability>
-  <release>stable</release>
-  <api>stable</api>
+  <release>alpha</release>
+  <api>alpha</api>
  </stability>
  <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
  <notes>
-* 
+* Initialize Module
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -130,57 +129,15 @@
  <dependencies>
   <required>
    <php>
-    <min>5.3.0</min>
+    <min>7.0.0</min>
     <max>8.0.0alpha1</max>
     <exclude>8.0.0alpha1</exclude>
    </php>
    <pearinstaller>
     <min>1.7.0</min>
    </pearinstaller>
-   <package>
-    <name>Horde_Exception</name>
-    <channel>pear.horde.org</channel>
-    <min>2.0.0</min>
-    <max>3.0.0alpha1</max>
-    <exclude>3.0.0alpha1</exclude>
-   </package>
-   <package>
-    <name>Horde_Support</name>
-    <channel>pear.horde.org</channel>
-    <min>2.0.0</min>
-    <max>3.0.0alpha1</max>
-    <exclude>3.0.0alpha1</exclude>
-   </package>
-   <package>
-    <name>Horde_Util</name>
-    <channel>pear.horde.org</channel>
-    <min>2.0.0</min>
-    <max>3.0.0alpha1</max>
-    <exclude>3.0.0alpha1</exclude>
-   </package>
   </required>
   <optional>
-   <package>
-    <name>Horde_Controller</name>
-    <channel>pear.horde.org</channel>
-    <min>2.0.0</min>
-    <max>3.0.0alpha1</max>
-    <exclude>3.0.0alpha1</exclude>
-   </package>
-   <package>
-    <name>Horde_Routes</name>
-    <channel>pear.horde.org</channel>
-    <min>2.0.0</min>
-    <max>3.0.0alpha1</max>
-    <exclude>3.0.0alpha1</exclude>
-   </package>
-   <package>
-    <name>Horde_Test</name>
-    <channel>pear.horde.org</channel>
-    <min>2.1.0</min>
-    <max>3.0.0alpha1</max>
-    <exclude>3.0.0alpha1</exclude>
-   </package>
    <extension>
     <name>json</name>
    </extension>
@@ -188,10 +145,10 @@
  </dependencies>
  <phprelease>
   <filelist>
-   <install as="CHANGES" name="doc/Horde/View/CHANGES" />
-   <install as="examples/template.php" name="doc/Horde/View/examples/template.php" />
-   <install as="examples/view.php" name="doc/Horde/View/examples/view.php" />
-   <install as="TODO.txt" name="doc/Horde/View/TODO.txt" />
+   <install as="View/CHANGES" name="doc/Horde/View/CHANGES" />
+   <install as="View/examples/template.php" name="doc/Horde/View/examples/template.php" />
+   <install as="View/examples/view.php" name="doc/Horde/View/examples/view.php" />
+   <install as="View/TODO.txt" name="doc/Horde/View/TODO.txt" />
    <install as="Horde/View.php" name="lib/Horde/View.php" />
    <install as="Horde/View/Base.php" name="lib/Horde/View/Base.php" />
    <install as="Horde/View/Exception.php" name="lib/Horde/View/Exception.php" />
@@ -248,237 +205,17 @@
  <changelog>
   <release>
    <version>
-    <release>0.2.1</release>
-    <api>0.2.0</api>
-   </version>
-   <stability>
-    <release>beta</release>
-    <api>beta</api>
-   </stability>
-   <date>2011-03-06</date>
-   <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
-   <notes>
-* Better Helper architecture, improved View/Helper registration
-   </notes>
-  </release>
-  <release>
-   <version>
-    <release>1.0.0alpha1</release>
-    <api>1.0.0</api>
+    <release>3.0.0alpha1</release>
+    <api>3.0.0alpha1</api>
    </version>
    <stability>
     <release>alpha</release>
     <api>alpha</api>
    </stability>
-   <date>2011-03-08</date>
+   <date>2021-02-24</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
-* First alpha release for Horde 4.
-   </notes>
-  </release>
-  <release>
-   <version>
-    <release>1.0.0beta1</release>
-    <api>1.0.0</api>
-   </version>
-   <stability>
-    <release>beta</release>
-    <api>beta</api>
-   </stability>
-   <date>2011-03-16</date>
-   <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
-   <notes>
-* First beta release for Horde 4.
-   </notes>
-  </release>
-  <release>
-   <version>
-    <release>1.0.0RC1</release>
-    <api>1.0.0</api>
-   </version>
-   <stability>
-    <release>beta</release>
-    <api>beta</api>
-   </stability>
-   <date>2011-03-22</date>
-   <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
-   <notes>
-* First release candidate for Horde 4.
-   </notes>
-  </release>
-  <release>
-   <version>
-    <release>1.0.0RC2</release>
-    <api>1.0.0</api>
-   </version>
-   <stability>
-    <release>beta</release>
-    <api>beta</api>
-   </stability>
-   <date>2011-03-29</date>
-   <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
-   <notes>
-* Second release candidate for Horde 4.
-   </notes>
-  </release>
-  <release>
-   <version>
-    <release>1.0.0</release>
-    <api>1.0.0</api>
-   </version>
-   <stability>
-    <release>stable</release>
-    <api>stable</api>
-   </stability>
-   <date>2011-04-06</date>
-   <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
-   <notes>
-* First stable release for Horde 4.
-   </notes>
-  </release>
-  <release>
-   <version>
-    <release>1.0.1</release>
-    <api>1.0.0</api></version>
-   <stability>
-    <release>stable</release>
-    <api>stable</api></stability>
-   <date>2011-11-22</date>
-   <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
-   <notes>
-* [jan] Make unit tests Windows compatible.
-   </notes>
-  </release>
-  <release>
-   <version>
-    <release>2.0.0alpha1</release>
-    <api>1.1.0</api></version>
-   <stability>
-    <release>alpha</release>
-    <api>stable</api></stability>
-   <date>2012-07-06</date>
-   <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
-   <notes>
-* First alpha release for Horde 5.
-* [mms] Added Horde_View_Helper_FormTag#optionTag().
-   </notes>
-  </release>
-  <release>
-   <version>
-    <release>2.0.0beta1</release>
-    <api>1.1.0</api></version>
-   <stability>
-    <release>beta</release>
-    <api>stable</api></stability>
-   <date>2012-07-19</date>
-   <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
-   <notes>
-* First beta release for Horde 5.
-   </notes>
-  </release>
-  <release>
-   <version>
-    <release>2.0.0</release>
-    <api>1.1.0</api></version>
-   <stability>
-    <release>stable</release>
-    <api>stable</api></stability>
-   <date>2012-10-30</date>
-   <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
-   <notes>
-* First stable release for Horde 5.
-   </notes>
-  </release>
-  <release>
-   <version>
-    <release>2.0.1</release>
-    <api>1.1.0</api></version>
-   <stability>
-    <release>stable</release>
-    <api>stable</api></stability>
-   <date>2012-11-19</date>
-   <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
-   <notes>
-* [mms] Use new Horde_Test layout.
-   </notes>
-  </release>
-  <release>
-   <version>
-    <release>2.0.2</release>
-    <api>1.1.0</api></version>
-   <stability>
-    <release>stable</release>
-    <api>stable</api></stability>
-   <date>2013-02-11</date>
-   <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
-   <notes>
-* [jan] Fix generating form tags.
-   </notes>
-  </release>
-  <release>
-   <version>
-    <release>2.0.3</release>
-    <api>1.1.0</api></version>
-   <stability>
-    <release>stable</release>
-    <api>stable</api></stability>
-   <date>2013-08-22</date>
-   <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
-   <notes>
-* [jan] Allow collections with arbitrary keys when rendering partials.
-   </notes>
-  </release>
-  <release>
-   <version>
-    <release>2.0.4</release>
-    <api>1.1.0</api></version>
-   <stability>
-    <release>stable</release>
-    <api>stable</api></stability>
-   <date>2014-05-14</date>
-   <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
-   <notes>
-* [jan] Change Horde_View_Helper_Date#distanceOfTimeInWords() to not round up the distance.
-* [jan] Make Horde_View_Helper_Text#truncate() and truncateMiddle() multibyte-safe (Bug #13163).
-   </notes>
-  </release>
-  <release>
-   <version>
-    <release>2.0.5</release>
-    <api>1.1.0</api></version>
-   <stability>
-    <release>stable</release>
-    <api>stable</api></stability>
-   <date>2015-04-28</date>
-   <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
-   <notes>
-* [jan] Fix issues with certain locales like Turkish.
-   </notes>
-  </release>
-  <release>
-   <version>
-    <release>2.0.6</release>
-    <api>1.1.0</api></version>
-   <stability>
-    <release>stable</release>
-    <api>stable</api></stability>
-   <date>2016-02-02</date>
-   <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
-   <notes>
-* [jan] Mark PHP 7 as supported.
-   </notes>
-  </release>
-  <release>
-   <version>
-    <release>2.0.7</release>
-    <api>1.1.0</api></version>
-   <stability>
-    <release>stable</release>
-    <api>stable</api></stability>
-   <date>2017-11-11</date>
-   <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
-   <notes>
-* 
+* Initialize Module
    </notes>
   </release>
  </changelog>
