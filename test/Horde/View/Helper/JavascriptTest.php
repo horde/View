@@ -11,7 +11,9 @@
  * @package    View
  * @subpackage UnitTests
  */
-
+namespace Horde\View\Helper;
+use \Horde_Test_Case;
+use \Horde_View;
 /**
  * @group      view
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -22,9 +24,9 @@
  * @package    View
  * @subpackage UnitTests
  */
-class Horde_View_Helper_JavascriptTest extends Horde_Test_Case
+class JavascriptTest extends Horde_Test_Case
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->view = new Horde_View();
         $this->view->addHelper('Javascript');

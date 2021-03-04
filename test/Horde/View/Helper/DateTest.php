@@ -11,7 +11,11 @@
  * @package    View
  * @subpackage UnitTests
  */
-
+namespace Horde\View;
+use \Horde_View;
+use \Helper;
+use \Horde_Test_Case;
+use \Horde_View_Helper_Date;
 /**
  * @group      view
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -22,9 +26,9 @@
  * @package    View
  * @subpackage UnitTests
  */
-class Horde_View_Helper_DateTest extends Horde_Test_Case
+class DateTest extends Horde_Test_Case
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->helper = new Horde_View_Helper_Date(new Horde_View());
     }

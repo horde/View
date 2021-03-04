@@ -11,7 +11,11 @@
  * @package    View
  * @subpackage UnitTests
  */
-
+namespace Horde\View;
+use \Helper;
+use \Horde_View;
+use \Horde_Test_Functional;
+use \Horde_View_Helper_Url;
 /**
  * @group      view
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -22,9 +26,9 @@
  * @package    View
  * @subpackage UnitTests
  */
-class Horde_View_Helper_FormTagTest extends Horde_Test_Functional
+class FormTagTest extends Horde_Test_Functional
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->view = new Horde_View();
         $this->view->addHelper('FormTag');

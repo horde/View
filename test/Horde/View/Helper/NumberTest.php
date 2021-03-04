@@ -11,7 +11,10 @@
  * @package    View
  * @subpackage UnitTests
  */
-
+namespace Horde\View\Helper;
+use \Horde_View;
+use \Horde_Test_Case;
+use \Horde_View_Helper_Number;
 /**
  * @group      view
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -22,9 +25,9 @@
  * @package    View
  * @subpackage UnitTests
  */
-class Horde_View_Helper_NumberTest extends Horde_Test_Case
+class NumberTest extends Horde_Test_Case
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->helper = new Horde_View_Helper_Number(new Horde_View());
     }

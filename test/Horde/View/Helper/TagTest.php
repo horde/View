@@ -11,7 +11,10 @@
  * @package    View
  * @subpackage UnitTests
  */
-
+namespace Horde\View;
+use \Helper;
+use \Horde_Test_Case;
+use \Horde_View;
 /**
  * @group      view
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -22,9 +25,9 @@
  * @package    View
  * @subpackage UnitTests
  */
-class Horde_View_Helper_TagTest extends Horde_Test_Case
+class TagTest extends Horde_Test_Case
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->view = new Horde_View();
         $this->view->addHelper('Tag');
@@ -39,7 +42,7 @@ class Horde_View_Helper_TagTest extends Horde_Test_Case
 
     public function testTagOptions()
     {
-        $this->assertRegExp('/\A<p class="(show|elsewhere)" \\/>\z/',
+        $this->assertMatchesRegularExpression('/\A<p class="(show|elsewhere)" \\/>\z/',
                             $this->view->tag('p', array('class' => 'show',
                                                         'class' => 'elsewhere')));
     }

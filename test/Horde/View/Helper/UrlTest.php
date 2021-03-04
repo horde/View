@@ -11,7 +11,13 @@
  * @package    View
  * @subpackage UnitTests
  */
-
+namespace Horde\View;
+use \Helper;
+use \Horde_Test_Case;
+use \Horde_View;
+use \Horde_Controller_Base;
+use \Horde_Controller_Request;
+use \Horde_Controller_Response;
 /**
  * @group      view
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -22,9 +28,9 @@
  * @package    View
  * @subpackage UnitTests
  */
-class Horde_View_Helper_UrlTest extends Horde_Test_Case
+class UrlTest extends Horde_Test_Case
 {
-    public function setUp()
+    public function setUp(): void
     {
         $controller = new Horde_View_Helper_UrlTest_MockController();
         $this->view = new Horde_View();

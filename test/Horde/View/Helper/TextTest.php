@@ -11,6 +11,12 @@
  * @package    View
  * @subpackage UnitTests
  */
+namespace Horde\View;
+use \Helper;
+use \Horde_Test_Case;
+use \Horde_View;
+use \Horde_View_Helper_Text_Cycle;
+use \InvalidArgumentException;
 
 /**
  * @group      view
@@ -22,9 +28,9 @@
  * @package    View
  * @subpackage UnitTests
  */
-class Horde_View_Helper_TextTest extends Horde_Test_Case
+class TextTest extends Horde_Test_Case
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->view = new Horde_View();
         $this->view->addHelper('Text');
@@ -102,20 +108,15 @@ class Horde_View_Helper_TextTest extends Horde_Test_Case
 
     public function testCycleClassWithInvalidArguments()
     {
-        try {
-            $value = new Horde_View_Helper_Text_Cycle('bad');
-            $this->fail();
-        } catch (InvalidArgumentException $e) {}
+        $this->expectException(InvalidArgumentException::class);
+        $value = new Horde_View_Helper_Text_Cycle('bad');
 
-        try {
-            $value = new Horde_View_Helper_Text_Cycle(array('foo'));
-            $this->fail();
-        } catch (InvalidArgumentException $e) {}
+        $this->expectException(InvalidArgumentException::class);
+        $value = new Horde_View_Helper_Text_Cycle(array('foo'));
 
-        try {
-            $value = new Horde_View_Helper_Text_Cycle(array('foo', 'bar'), 'bad-arg');
-            $this->fail();
-        } catch (InvalidArgumentException $e) {}
+        $this->expectException(InvalidArgumentException::class);
+
+        $value = new Horde_View_Helper_Text_Cycle(array('foo', 'bar'), 'bad-arg');
     }
 
     public function testCycleResetsWithNewValues()
@@ -155,7 +156,8 @@ class Horde_View_Helper_TextTest extends Horde_Test_Case
 
     public function testResetUnknownCycle()
     {
-        $this->view->resetCycle('colors');
+        $ret = $this->view->resetCycle('colors');
+        $this->assertNull($ret);
     }
 
     public function testResetNamedCycle()
