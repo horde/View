@@ -16,7 +16,7 @@
   <email>chuck@horde.org</email>
   <active>no</active>
  </lead>
- <date>2021-02-24</date>
+ <date>2021-03-13</date>
  <version>
   <release>3.0.0alpha3</release>
   <api>3.0.0alpha1</api>
@@ -27,7 +27,7 @@
  </stability>
  <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
  <notes>
-* 
+* |+
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -116,6 +116,10 @@
        <file name="TextTest.php" role="test" />
        <file name="UrlTest.php" role="test" />
       </dir> <!-- /test/Horde/View/Helper -->
+      <dir name="Mock">
+       <file name="Builder.php" role="test" />
+       <file name="UrlHelper.php" role="test" />
+      </dir> <!-- /test/Horde/View/Mock -->
       <file name="AllTests.php" role="test" />
       <file name="BaseTest.php" role="test" />
       <file name="bootstrap.php" role="test" />
@@ -200,27 +204,11 @@
    <install as="Horde/View/Helper/TextTest.php" name="test/Horde/View/Helper/TextTest.php" />
    <install as="Horde/View/Helper/UrlTest.php" name="test/Horde/View/Helper/UrlTest.php" />
    <install as="Horde/View/InterfaceTest.php" name="test/Horde/View/InterfaceTest.php" />
+   <install as="Horde/View/Mock/Builder.php" name="test/Horde/View/Mock/Builder.php" />
+   <install as="Horde/View/Mock/UrlHelper.php" name="test/Horde/View/Mock/UrlHelper.php" />
   </filelist>
  </phprelease>
  <changelog>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
   <release>
    <version>
     <release>0.2.1</release>
@@ -505,7 +493,7 @@
    <date>2021-02-24</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
-* 
+* |+
    </notes>
   </release>
  </changelog>
