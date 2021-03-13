@@ -1,4 +1,5 @@
 {
+    "minimum-stability": "dev",
     "name": "horde/view",
     "description": "View pattern library",
     "type": "library",
@@ -25,14 +26,14 @@
     ],
     "require": {
         "php": "^7",
-        "horde/exception": "^3",
-        "horde/support": "^3",
-        "horde/util": "^3"
+        "horde/exception": "^3 || dev-FRAMEWORK_6_0",
+        "horde/support": "^3 || dev-FRAMEWORK_6_0",
+        "horde/util": "^3 || dev-FRAMEWORK_6_0"
     },
     "suggest": {
-        "horde/controller": "^3",
-        "horde/routes": "^3",
-        "horde/test": "^3",
+        "horde/controller": "^3 || dev-FRAMEWORK_6_0",
+        "horde/routes": "^3 || dev-FRAMEWORK_6_0",
+        "horde/test": "^3 || dev-FRAMEWORK_6_0",
         "ext-json": "*"
     },
     "autoload": {
