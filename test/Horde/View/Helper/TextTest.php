@@ -11,8 +11,7 @@
  * @package    View
  * @subpackage UnitTests
  */
-namespace Horde\View;
-use \Helper;
+namespace Horde\View\Helper;
 use \Horde_Test_Case;
 use \Horde_View;
 use \Horde_View_Helper_Text_Cycle;

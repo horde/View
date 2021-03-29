@@ -11,13 +11,13 @@
  * @package    View
  * @subpackage UnitTests
  */
-namespace Horde\View;
-use \Helper;
-use \Horde_Test_Case;
+namespace Horde\View\Helper;
+use \Horde_Test_Case as TestCase;
 use \Horde_View;
 use \Horde_Controller_Base;
 use \Horde_Controller_Request;
 use \Horde_Controller_Response;
+
 /**
  * @group      view
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -28,11 +28,11 @@ use \Horde_Controller_Response;
  * @package    View
  * @subpackage UnitTests
  */
-class UrlTest extends Horde_Test_Case
+class UrlTest extends TestCase
 {
     public function setUp(): void
     {
-        $controller = new Horde_View_Helper_UrlTest_MockController();
+        $controller = new UrlTestMockController();
         $this->view = new Horde_View();
         $this->view->controller = $controller;
         $this->view->addHelper('Url');
@@ -134,16 +134,4 @@ class UrlTest extends Horde_Test_Case
                             $this->view->mailTo("me@domain.com", null, array('encode' => "hex", 'replaceAt' => "(at)", 'replaceDot' => "(dot)")));
     }
 
-}
-
-class Horde_View_Helper_UrlTest_MockController extends Horde_Controller_Base
-{
-    public function processRequest(Horde_Controller_Request $request, Horde_Controller_Response $response)
-    {
-    }
-
-    public function getUrlWriter()
-    {
-        return new Horde_Controller_UrlWriter(new Horde_Routes_Utils(new Horde_Routes_Mapper()));
-    }
 }

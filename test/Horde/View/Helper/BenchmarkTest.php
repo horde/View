@@ -11,7 +11,7 @@
  * @package    View
  * @subpackage UnitTests
  */
-namespace Horde\View;
+namespace Horde\View\Helper;
 use \Horde_Log;
 use \Horde_Log_Handler_Mock;
 use \Horde_Log_Logger;

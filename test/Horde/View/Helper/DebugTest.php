@@ -11,8 +11,7 @@
  * @package    View
  * @subpackage UnitTests
  */
-namespace Horde\View;
-use \Helper;
+namespace Horde\View\Helper;
 use \Horde_View;
 use \PHPUnit\Framework\TestCase;
 use \Horde_View_Helper_Debug;

@@ -12,7 +12,7 @@
  * @subpackage UnitTests
  */
 namespace Horde\View;
-use \Horde_Test_Case;
+use \Horde_Test_Case as TestCase;
 use \Horde_View;
 use \Horde_View_Helper_Base;
 use \Horde_View_Helper_Text;
@@ -30,7 +30,7 @@ use \Exception as Exception;
  * @package    View
  * @subpackage UnitTests
  */
-class BaseTest extends Horde_Test_Case
+class BaseTest extends TestCase
 {
     protected $_view = null;
 
