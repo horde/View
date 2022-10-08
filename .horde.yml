@@ -39,6 +39,10 @@ dependencies:
     composer:
       horde/controller: ^3
       horde/routes: ^3
-      horde/test: ^3
     ext:
       json: '*'
+  dev:
+    composer:
+      horde/test: ^3
+      horde/log: ^3
+
