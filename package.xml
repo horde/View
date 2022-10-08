@@ -16,7 +16,7 @@
   <email>chuck@horde.org</email>
   <active>no</active>
  </lead>
- <date>2021-03-13</date>
+ <date>2022-10-08</date>
  <version>
   <release>3.0.0alpha4</release>
   <api>3.0.0alpha1</api>
@@ -25,12 +25,20 @@
   <release>alpha</release>
   <api>alpha</api>
  </stability>
- <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
+ <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1-only</license>
  <notes>
-* 
+* [rla] Applied minor return type fixes.
+* |+
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
+   <dir name=".github">
+    <dir name="workflows">
+     <file name="ci.yml" role="php" />
+     <file name="phpdoc.yml" role="php" />
+     <file name="update-satis.yml" role="php" />
+    </dir> <!-- /.github/workflows -->
+   </dir> <!-- /.github -->
    <dir name="doc">
     <dir name="Horde">
      <dir name="View">
@@ -115,6 +123,7 @@
        <file name="TagTest.php" role="test" />
        <file name="TextTest.php" role="test" />
        <file name="UrlTest.php" role="test" />
+       <file name="UrlTestMockController.php" role="test" />
       </dir> <!-- /test/Horde/View/Helper -->
       <dir name="Mock">
        <file name="Builder.php" role="test" />
@@ -133,9 +142,9 @@
  <dependencies>
   <required>
    <php>
-    <min>7.0.0</min>
-    <max>8.0.0alpha1</max>
-    <exclude>8.0.0alpha1</exclude>
+    <min>7.4.0</min>
+    <max>9.0.0alpha1</max>
+    <exclude>9.0.0alpha1</exclude>
    </php>
    <pearinstaller>
     <min>1.7.0</min>
@@ -149,6 +158,9 @@
  </dependencies>
  <phprelease>
   <filelist>
+   <install as="workflows/ci.yml" name=".github/workflows/ci.yml" />
+   <install as="workflows/phpdoc.yml" name=".github/workflows/phpdoc.yml" />
+   <install as="workflows/update-satis.yml" name=".github/workflows/update-satis.yml" />
    <install as="View/CHANGES" name="doc/Horde/View/CHANGES" />
    <install as="View/examples/template.php" name="doc/Horde/View/examples/template.php" />
    <install as="View/examples/view.php" name="doc/Horde/View/examples/view.php" />
@@ -203,31 +215,13 @@
    <install as="Horde/View/Helper/TagTest.php" name="test/Horde/View/Helper/TagTest.php" />
    <install as="Horde/View/Helper/TextTest.php" name="test/Horde/View/Helper/TextTest.php" />
    <install as="Horde/View/Helper/UrlTest.php" name="test/Horde/View/Helper/UrlTest.php" />
+   <install as="Horde/View/Helper/UrlTestMockController.php" name="test/Horde/View/Helper/UrlTestMockController.php" />
    <install as="Horde/View/InterfaceTest.php" name="test/Horde/View/InterfaceTest.php" />
    <install as="Horde/View/Mock/Builder.php" name="test/Horde/View/Mock/Builder.php" />
    <install as="Horde/View/Mock/UrlHelper.php" name="test/Horde/View/Mock/UrlHelper.php" />
   </filelist>
  </phprelease>
  <changelog>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
   <release>
    <version>
     <release>0.2.1</release>
@@ -525,9 +519,10 @@
     <api>alpha</api>
    </stability>
    <date>2021-03-13</date>
-   <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
+   <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1-only</license>
    <notes>
-* 
+* [rla] Applied minor return type fixes.
+* |+
    </notes>
   </release>
  </changelog>

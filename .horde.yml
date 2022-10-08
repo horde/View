@@ -45,4 +45,3 @@ dependencies:
     composer:
       horde/test: ^3
       horde/log: ^3
-
