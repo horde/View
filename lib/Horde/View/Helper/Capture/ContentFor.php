@@ -32,6 +32,7 @@ class Horde_View_Helper_Capture_ContentFor extends Horde_View_Helper_Capture_Bas
      * @var string
      */
     private $_name;
+    protected $_view;
 
     /**
      * Starts capturing content that will be stored as $view->contentForName.
@@ -55,5 +56,6 @@ class Horde_View_Helper_Capture_ContentFor extends Horde_View_Helper_Capture_Bas
     {
         $name = 'contentFor' . Horde_String::ucfirst($this->_name);
         $this->_view->$name = parent::end();
+        return $this->_view->$name;
     }
 }

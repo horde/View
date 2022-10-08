@@ -53,8 +53,7 @@ class Horde_View_Helper_Capture_Base
             $this->_buffering = false;
             $output = ob_get_clean();
             return $output;
-        } else {
-            throw new Horde_View_Exception('Capture already ended');
         }
+        throw new Horde_View_Exception('Capture already ended');
     }
 }
