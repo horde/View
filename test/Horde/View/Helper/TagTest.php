@@ -22,6 +22,7 @@
  * @package    View
  * @subpackage UnitTests
  */
+#[AllowDynamicProperties]
 class Horde_View_Helper_TagTest extends Horde_Test_Case
 {
     public function setUp(): void
@@ -39,7 +40,7 @@ class Horde_View_Helper_TagTest extends Horde_Test_Case
 
     public function testTagOptions()
     {
-        $this->assertRegExp('/\A<p class="(show|elsewhere)" \\/>\z/',
+        $this->assertMatchesRegularExpression('/\A<p class="(show|elsewhere)" \\/>\z/',
                             $this->view->tag('p', array('class' => 'show',
                                                         'class' => 'elsewhere')));
     }

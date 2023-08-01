@@ -22,6 +22,7 @@
  * @package    View
  * @subpackage UnitTests
  */
+#[AllowDynamicProperties]
 class Horde_View_Helper_BenchmarkTest extends Horde_Test_Case
 {
     public function setUp(): void
@@ -80,7 +81,7 @@ class Horde_View_Helper_BenchmarkTest extends Horde_Test_Case
     {
         $last = end($this->mock->events);
         $this->assertEquals(strtoupper($level), $last['levelName']);
-        $this->assertRegExp("/^$message \(.*\)$/", $last['message']);
+        $this->assertMatchesRegularExpression("/^$message \(.*\)$/", $last['message']);
     }
 
 }

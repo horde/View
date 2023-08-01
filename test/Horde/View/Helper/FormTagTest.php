@@ -22,6 +22,7 @@
  * @package    View
  * @subpackage UnitTests
  */
+#[AllowDynamicProperties]
 class Horde_View_Helper_FormTagTest extends Horde_Test_Functional
 {
     public function setUp(): void

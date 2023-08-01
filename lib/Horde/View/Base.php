@@ -11,6 +11,7 @@
  * @category Horde
  * @package View
  */
+#[AllowDynamicProperties]
 abstract class Horde_View_Base
 {
     /**

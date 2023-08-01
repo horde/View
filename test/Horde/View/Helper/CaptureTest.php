@@ -22,6 +22,7 @@
  * @package    View
  * @subpackage UnitTests
  */
+#[AllowDynamicProperties]
 class Horde_View_Helper_CaptureTest extends Horde_Test_Case
 {
     public function setUp(): void
@@ -48,7 +49,7 @@ class Horde_View_Helper_CaptureTest extends Horde_Test_Case
             $this->fail();
         } catch (Exception $e) {
             $this->assertInstanceOf('Horde_View_Exception', $e);
-            $this->assertRegExp('/capture already ended/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/capture already ended/i', $e->getMessage());
         }
     }
 

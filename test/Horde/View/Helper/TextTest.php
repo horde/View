@@ -22,6 +22,7 @@
  * @package    View
  * @subpackage UnitTests
  */
+#[AllowDynamicProperties]
 class Horde_View_Helper_TextTest extends Horde_Test_Case
 {
     public function setUp(): void

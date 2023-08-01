@@ -24,6 +24,7 @@
  * @package    View
  * @subpackage Helper
  */
+#[AllowDynamicProperties]
 class Horde_View_Helper_Capture_ContentFor extends Horde_View_Helper_Capture_Base
 {
     /**
