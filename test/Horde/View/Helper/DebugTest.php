@@ -22,9 +22,9 @@
  * @package    View
  * @subpackage UnitTests
  */
-class Horde_View_Helper_DebugTest extends PHPUnit_Framework_TestCase
+class Horde_View_Helper_DebugTest extends Horde_Test_Case
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->helper = new Horde_View_Helper_Debug(new Horde_View());
     }
@@ -37,7 +37,7 @@ class Horde_View_Helper_DebugTest extends PHPUnit_Framework_TestCase
         $expected = '<pre class="debug_dump">string(7) &quot;foo&amp;bar&quot;';
         $output = $this->helper->debug('foo&bar');
         ini_set('xdebug.overload_var_dump', $xdebug);
-        $this->assertContains($expected, $output);
+        $this->assertStringContainsString($expected, $output);
     }
 
 }

@@ -24,7 +24,7 @@
  */
 class Horde_View_Helper_FormTagTest extends Horde_Test_Functional
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->view = new Horde_View();
         $this->view->addHelper('FormTag');

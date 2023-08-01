@@ -24,7 +24,7 @@
  */
 class Horde_View_Helper_TextTest extends Horde_Test_Case
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->view = new Horde_View();
         $this->view->addHelper('Text');
@@ -102,6 +102,7 @@ class Horde_View_Helper_TextTest extends Horde_Test_Case
 
     public function testCycleClassWithInvalidArguments()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $value = new Horde_View_Helper_Text_Cycle('bad');
             $this->fail();
@@ -155,6 +156,7 @@ class Horde_View_Helper_TextTest extends Horde_Test_Case
 
     public function testResetUnknownCycle()
     {
+        $this->expectNotToPerformAssertions();
         $this->view->resetCycle('colors');
     }
 

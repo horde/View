@@ -22,9 +22,9 @@
  * @package    View
  * @subpackage UnitTests
  */
-class Horde_View_Helper_CaptureTest extends PHPUnit_Framework_TestCase
+class Horde_View_Helper_CaptureTest extends Horde_Test_Case
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->view   = new Horde_View();
         $this->helper = new Horde_View_Helper_Capture($this->view);

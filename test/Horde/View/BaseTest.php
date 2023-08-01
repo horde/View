@@ -26,7 +26,7 @@ class Horde_View_BaseTest extends Horde_Test_Case
 {
     protected $_view = null;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_view = new Horde_View();
         $this->_view->addTemplatePath(__DIR__ . '/fixtures/');
@@ -51,6 +51,7 @@ class Horde_View_BaseTest extends Horde_Test_Case
 
     public function testAssignDoesntOverridePrivateVariables()
     {
+        $this->expectNotToPerformAssertions();
         try {
             $this->_view->assign(array('_templatePath' => 'test'));
         } catch (Exception $e) {
@@ -237,6 +238,8 @@ class Horde_View_BaseTest extends Horde_Test_Case
     // test adding a helper where methods conflict
     public function testAddHorde_View_Helper_TextMethodOverwrite()
     {
+        $this->expectNotToPerformAssertions();
+
         // add text helper
         $this->_view->addHelper(new Horde_View_Helper_Text($this->_view));
 

@@ -24,7 +24,7 @@
  */
 class Horde_View_Helper_UrlTest extends Horde_Test_Case
 {
-    public function setUp()
+    public function setUp(): void
     {
         $controller = new Horde_View_Helper_UrlTest_MockController();
         $this->view = new Horde_View();

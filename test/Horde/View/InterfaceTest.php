@@ -15,10 +15,11 @@
  * @package    View
  * @subpackage UnitTests
  */
-class Horde_View_InterfaceTest extends PHPUnit_Framework_TestCase {
+class Horde_View_InterfaceTest extends Horde_Test_Case {
 
     public function testViewInterface()
     {
+        $this->expectNotToPerformAssertions();
         eval('class Test_View extends Horde_View implements Horde_View_Interface {};');
     }
 

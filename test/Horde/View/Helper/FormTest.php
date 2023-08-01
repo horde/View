@@ -24,7 +24,7 @@
  */
 class Horde_View_Helper_FormTest extends Horde_Test_Case
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->view = new Horde_View();
         $this->view->addHelper('Form');

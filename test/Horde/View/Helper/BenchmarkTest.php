@@ -22,9 +22,9 @@
  * @package    View
  * @subpackage UnitTests
  */
-class Horde_View_Helper_BenchmarkTest extends PHPUnit_Framework_TestCase
+class Horde_View_Helper_BenchmarkTest extends Horde_Test_Case
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->view = new Horde_View();
         $this->view->addHelper(new Horde_View_Helper_Benchmark($this->view));
@@ -35,6 +35,8 @@ class Horde_View_Helper_BenchmarkTest extends PHPUnit_Framework_TestCase
 
     public function testWithoutLogger()
     {
+        $this->expectNotToPerformAssertions();
+
         $this->view = new Horde_View();
         $this->view->addHelper(new Horde_View_Helper_Benchmark($this->view));
 
