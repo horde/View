@@ -19,6 +19,326 @@ abstract class Horde_View_Base
     public static $defaultFormBuilder = 'Horde_View_Helper_Form_Builder';
 
     /**
+     * @var bool
+     */
+    public $outputJs;
+
+    /**
+     * @var array
+     */
+    public $stylesheetOpts;
+
+    /**
+     * @var string
+     */
+    public $htmlAttr;
+
+    /**
+     * @var string
+     */
+    public $bodyAttr;
+
+    /**
+     * @var string
+     */
+    public $pageTitle;
+
+    /**
+     * @var string
+     */
+    public $pageOutput;
+
+    /**
+     * @var string
+     */
+    public $sidebar;
+
+    /**
+     * @var string
+     */
+    public $basicView;
+
+    /**
+     * @var string
+     */
+    public $headers;
+
+    /**
+     * @var string
+     */
+    public $sortdirclass;
+
+    /**
+     * @var string
+     */
+    public $showNotepad;
+
+    /**
+     * @var string
+     */
+    public $editImg;
+
+    /**
+     * @var string
+     */
+    public $browser;
+
+    /**
+     * @var string
+     */
+    public $title;
+
+    /**
+     * @var string
+     */
+    public $searchUrl;
+
+    /**
+     * @var string
+     */
+    public $searchImg;
+
+    /**
+     * @var string
+     */
+    public $count;
+
+    /**
+     * @var string
+     */
+    public $items;
+
+    /**
+     * @var string
+     */
+    public $rootItems;
+
+    /**
+     * @var string
+     */
+    public $newText;
+
+    /**
+     * @var string
+     */
+    public $newLink;
+
+    /**
+     * @var string
+     */
+    public $left;
+
+    /**
+     * @var string
+     */
+    public $width;
+
+    /**
+     * @var string
+     */
+    public $containers;
+
+    /**
+     * @var string
+     */
+    public $sidebarWidth;
+
+    /**
+     * @var string
+     */
+    public $date;
+
+    /**
+     * @var string
+     */
+    public $logoutUrl;
+
+    /**
+     * @var string
+     */
+    public $searchLabel;
+
+    /**
+     * @var string
+     */
+    public $searchIcon;
+
+    /**
+     * @var string
+     */
+    public $searchAction;
+
+    /**
+     * @var string
+     */
+    public $menu;
+
+    /**
+     * @var string
+     */
+    public $version;
+
+    /**
+     * @var string
+     */
+    public $portalUrl;
+
+    /**
+     * @var string
+     */
+    public $tasks;
+
+    /**
+     * @var string
+     */
+    public $tabs;
+
+    /**
+     * @var string
+     */
+    public $sortby;
+
+    /**
+     * @var string
+     */
+    public $sortdir;
+
+    /**
+     * @var string
+     */
+    public $dateFormat;
+
+    /**
+     * @var string
+     */
+    public $columns;
+
+    /**
+     * @var string
+     */
+    public $smartShare;
+
+    /**
+     * @var string
+     */
+    public $haveSearch;
+
+    /**
+     * @var string
+     */
+    public $tab_name;
+
+    /**
+     * @var string
+     */
+    public $dynamic_sort;
+
+    /**
+     * @var string
+     */
+    public $baseurl;
+
+    /**
+     * @var string
+     */
+    public $newExtra;
+
+    /**
+     * @var string
+     */
+    public $search;
+
+    /**
+     * @var string
+     */
+    public $today;
+
+    /**
+     * @var string
+     */
+    public $weekdays;
+
+    /**
+     * @var string
+     */
+    public $newShares;
+
+    /**
+     * @var string
+     */
+    public $admin;
+
+    /**
+     * @var string
+     */
+    public $resources;
+
+    /**
+     * @var string
+     */
+    public $resourceAdmin;
+
+    /**
+     * @var string
+     */
+    public $addRemote;
+
+    /**
+     * @var string
+     */
+    public $showRemote;
+
+    /**
+     * @var string
+     */
+    public $content;
+
+    /**
+     * @var string
+     */
+    public $searchParameters;
+
+    /**
+     * @var string
+     */
+    public $event;
+
+    /**
+     * @var string
+     */
+    public $imageId;
+
+    /**
+     * @var string
+     */
+    public $user;
+
+    /**
+     * @var string
+     */
+    public $timeFormat;
+
+    /**
+     * @var string
+     */
+    public $start;
+
+    /**
+     * @var string
+     */
+    public $prefsUrl;
+
+    /**
+     * @var string
+     */
+    public $attendees;
+
+    /**
+     * @var string
+     */
+    public $subinfo;
+
+    /**
      * Path stack for templates.
      *
      * @var array
