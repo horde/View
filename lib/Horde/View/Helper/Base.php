@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @category   Horde
  * @package    View
@@ -64,6 +65,6 @@ abstract class Horde_View_Helper_Base
      */
     public function __call($method, $args)
     {
-        return call_user_func_array(array($this->_view, $method), $args);
+        return call_user_func_array([$this->_view, $method], $args);
     }
 }

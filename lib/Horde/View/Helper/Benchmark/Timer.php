@@ -1,4 +1,5 @@
 <?php
+
 /**
  * An instance of this class is returned by
  * Horde_View_Helper_Benchmark::benchmark().

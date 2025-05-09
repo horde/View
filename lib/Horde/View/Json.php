@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @category Horde
  * @package View
@@ -19,15 +20,13 @@ class Horde_View_Json extends Horde_View_Base
      *
      * @return string  The template output.
      */
-    public function render($name = '', $locals = array())
+    public function render($name = '', $locals = [])
     {
-        return json_encode((object)(array)$this);
+        return json_encode((object) (array) $this);
     }
 
     /**
      * Satisfy the abstract _run function in Horde_View_Base.
      */
-    protected function _run()
-    {
-    }
+    protected function _run() {}
 }

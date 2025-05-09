@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Measures the execution time of a block in a template and reports the result
  * to the log.
@@ -55,7 +56,10 @@ class Horde_View_Helper_Benchmark extends Horde_View_Helper_Base
      */
     public function benchmark($message = 'Benchmarking', $level = 'info')
     {
-        return new Horde_View_Helper_Benchmark_Timer($message, $level,
-                                                     $this->_view->logger);
+        return new Horde_View_Helper_Benchmark_Timer(
+            $message,
+            $level,
+            $this->_view->logger
+        );
     }
 }

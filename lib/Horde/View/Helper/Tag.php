@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2007-2008 Maintainable Software, LLC
  * Copyright 2008-2017 Horde LLC (http://www.horde.org/)
@@ -32,7 +33,7 @@ class Horde_View_Helper_Tag extends Horde_View_Helper_Base
      *
      * @var array
      */
-    private $_booleanAttributes = array('checked', 'disabled', 'multiple', 'readonly', 'selected');
+    private $_booleanAttributes = ['checked', 'disabled', 'multiple', 'readonly', 'selected'];
 
     /**
      * Returns an empty HTML tag of type $name.

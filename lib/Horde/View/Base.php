@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @category Horde
  * @package View
@@ -28,7 +29,7 @@ abstract class Horde_View_Base extends stdClass
      *
      * @var array
      */
-    private $_templatePath = array('./');
+    private $_templatePath = ['./'];
 
     /**
      * Template to execute.
@@ -44,7 +45,7 @@ abstract class Horde_View_Base extends stdClass
      *
      * @var array
      */
-    private $_helpers = array();
+    private $_helpers = [];
 
     /**
      * Encoding to use in escaping mechanisms.
@@ -72,7 +73,7 @@ abstract class Horde_View_Base extends stdClass
      *
      * @param array $config  Configuration key-value pairs.
      */
-    public function __construct($config = array())
+    public function __construct($config = [])
     {
         // Encoding.
         if (!empty($config['encoding'])) {
@@ -109,7 +110,7 @@ abstract class Horde_View_Base extends stdClass
     public function __call($method, $args)
     {
         if (isset($this->_helpers[$method])) {
-            return call_user_func_array(array($this->_helpers[$method], $method), $args);
+            return call_user_func_array([$this->_helpers[$method], $method], $args);
         }
 
         throw new Horde_View_Exception('Helper for ' . $method . ' not found.');
@@ -122,7 +123,7 @@ abstract class Horde_View_Base extends stdClass
      */
     public function addTemplatePath($path)
     {
-        foreach ((array)$path as $dir) {
+        foreach ((array) $path as $dir) {
             // Attempt to strip any possible separator and append a
             // directory separator.
             $dir = rtrim($dir, '\\/' . DIRECTORY_SEPARATOR) . '/';
@@ -141,7 +142,7 @@ abstract class Horde_View_Base extends stdClass
      */
     public function setTemplatePath($path)
     {
-        $this->_templatePath = array();
+        $this->_templatePath = [];
         $this->addTemplatePath($path);
     }
 
@@ -234,7 +235,7 @@ abstract class Horde_View_Base extends stdClass
      *
      * @return string  The template output.
      */
-    public function render($name, $locals = array())
+    public function render($name, $locals = [])
     {
         // Render partial.
         if (is_array($name) && $partial = $name['partial']) {
@@ -273,10 +274,10 @@ abstract class Horde_View_Base extends stdClass
      *
      * @return string  The template output.
      */
-    public function renderPartial($name, $options = array())
+    public function renderPartial($name, $options = [])
     {
         // Pop name off of the path.
-        $parts = strstr($name, '/') ? explode('/', $name) : array($name);
+        $parts = strstr($name, '/') ? explode('/', $name) : [$name];
         $name = array_pop($parts);
         $path = count($parts)
             ? implode('/', $parts) . '/'
@@ -285,11 +286,11 @@ abstract class Horde_View_Base extends stdClass
         // Check if they passed in a collection before validating keys.
         $useCollection = array_key_exists('collection', $options);
 
-        $valid = array('object' => null,
-                       'locals' => array(),
-                       'collection' => array());
+        $valid = ['object' => null,
+            'locals' => [],
+            'collection' => []];
         $options = array_merge($valid, $options);
-        $locals = array($name => null);
+        $locals = [$name => null];
 
         // Set the object variable.
         if ($options['object']) {

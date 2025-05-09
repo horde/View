@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2007 Maintainable Software, LLC
  * Copyright 2006-2017 Horde LLC (http://www.horde.org/)
@@ -28,7 +29,7 @@ class Horde_View_Helper_Text extends Horde_View_Helper_Base
     /**
      * @var array
      */
-    protected $_cycles = array();
+    protected $_cycles = [];
 
     /**
      * @var Horde_Support_Inflector
@@ -116,7 +117,7 @@ class Horde_View_Helper_Text extends Horde_View_Helper_Base
         $last = end($values);
         if (is_array($last)) {
             $options = array_pop($values);
-            $name = isset($options['name']) ? $options['name'] : 'default';
+            $name = $options['name'] ?? 'default';
         } else {
             $name = 'default';
         }
@@ -166,9 +167,11 @@ class Horde_View_Helper_Text extends Horde_View_Helper_Base
         if (empty($phrase) || empty($text)) {
             return $text;
         }
-        return preg_replace('/(' . preg_quote($phrase, '/') . ')/',
-                            $highlighter,
-                            $text);
+        return preg_replace(
+            '/(' . preg_quote($phrase, '/') . ')/',
+            $highlighter,
+            $text
+        );
     }
 
     /**
@@ -248,8 +251,8 @@ class Horde_View_Helper_Text extends Horde_View_Helper_Base
     public function makeBreakable($str)
     {
         return str_replace(
-            array('/',      '_'),
-            array('/<wbr>', '_<wbr>'),
+            ['/',      '_'],
+            ['/<wbr>', '_<wbr>'],
             $str
         );
     }
@@ -265,7 +268,7 @@ class Horde_View_Helper_Text extends Horde_View_Helper_Base
      */
     public function cleanSmartQuotes($str)
     {
-        $search = array(
+        $search = [
             '/\x96/',
             '/\xE2\x80\x93/',
             '/\x97/',
@@ -291,9 +294,9 @@ class Horde_View_Helper_Text extends Horde_View_Helper_Base
             '/\xBD/',
             '/\xC2\xBE/',
             '/\xBE/',
-        );
+        ];
 
-        $replace = array(
+        $replace = [
             '-',
             '-',
             '--',
@@ -318,7 +321,7 @@ class Horde_View_Helper_Text extends Horde_View_Helper_Base
             '1/2',
             '3/4',
             '3/4',
-        );
+        ];
 
         return preg_replace($search, $replace, $str);
     }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2007-2008 Maintainable Software, LLC
  * Copyright 2006-2017 Horde LLC (http://www.horde.org/)
@@ -28,9 +29,11 @@ class Horde_View_Helper_Date extends Horde_View_Helper_Base
     /**
      * @todo possibly convert from time object
      */
-    public function distanceOfTimeInWords($fromTime, $toTime = 0,
-                                          $includeSeconds = false)
-    {
+    public function distanceOfTimeInWords(
+        $fromTime,
+        $toTime = 0,
+        $includeSeconds = false
+    ) {
         $distanceInMinutes = floor(abs($toTime - $fromTime) / 60);
         $distanceInSeconds = floor(abs($toTime - $fromTime));
 
@@ -83,9 +86,9 @@ class Horde_View_Helper_Date extends Horde_View_Helper_Base
         return $this->distanceOfTimeInWords($fromTime, time(), $includeSeconds);
     }
 
-    public function dateSelect($objectName, $method, $options = array())
+    public function dateSelect($objectName, $method, $options = [])
     {
-        $object = isset($options['object']) ? $options['object'] : null;
+        $object = $options['object'] ?? null;
         unset($options['object']);
         $tag = new $this->_instanceTag($objectName, $method, $this->_view, $object);
         return $tag->toDateSelectTag($options);

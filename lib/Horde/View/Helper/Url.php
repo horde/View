@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2007 Maintainable Software, LLC
  * Copyright 2006-2017 Horde LLC (http://www.horde.org/)
@@ -82,7 +83,7 @@ class Horde_View_Helper_Url extends Horde_View_Helper_Base
      *
      * @return  string
      */
-    public function urlFor($first = array(), $second = array())
+    public function urlFor($first = [], $second = [])
     {
         return is_string($first) ? $first : $this->controller->getUrlWriter()->urlFor($first, $second);
     }
@@ -140,12 +141,12 @@ class Horde_View_Helper_Url extends Horde_View_Helper_Base
      *        var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method');
      *        m.setAttribute('value', 'delete'); f.appendChild(m);f.submit(); };return false;">Delete Image</a>
      */
-    public function linkTo($name, $options = array(), $htmlOptions = array())
+    public function linkTo($name, $options = [], $htmlOptions = [])
     {
         $url = $this->urlFor($options);
 
         if ($htmlOptions) {
-            $href = isset($htmlOptions['href']) ? $htmlOptions['href'] : null;
+            $href = $htmlOptions['href'] ?? null;
             // @todo convert_options_to_javascript!(html_options, url)
             $tagOptions = $this->tagOptions($htmlOptions);
         } else {
@@ -153,7 +154,7 @@ class Horde_View_Helper_Url extends Horde_View_Helper_Base
         }
 
         $hrefAttr = isset($href) ? null : 'href="' . $url . '"';
-        $nameOrUrl = isset($name) ? $name : $url;
+        $nameOrUrl = $name ?? $url;
         return '<a ' . $hrefAttr . $tagOptions . '>' . $nameOrUrl . '</a>';
     }
 
@@ -197,10 +198,14 @@ class Horde_View_Helper_Url extends Horde_View_Helper_Base
      *        end
      *     %>
      */
-    public function linkToUnlessCurrent($name, $url, $htmlOptions = array())
+    public function linkToUnlessCurrent($name, $url, $htmlOptions = [])
     {
-        return $this->linkToUnless($this->isCurrentPage($url),
-                                   $name, $url, $htmlOptions);
+        return $this->linkToUnless(
+            $this->isCurrentPage($url),
+            $name,
+            $url,
+            $htmlOptions
+        );
     }
 
     /**
@@ -225,7 +230,7 @@ class Horde_View_Helper_Url extends Horde_View_Helper_Base
      *   # If not...
      *   # => <a href="/accounts/signup">Reply</a>
      */
-    public function linkToUnless($condition, $name, $url, $htmlOptions = array())
+    public function linkToUnless($condition, $name, $url, $htmlOptions = [])
     {
         return $condition ? $name : $this->linkTo($name, $url, $htmlOptions);
     }
@@ -252,7 +257,7 @@ class Horde_View_Helper_Url extends Horde_View_Helper_Base
      *   # If they are logged in...
      *   # => <a href="/accounts/show/3">my_username</a>
      */
-    public function linkToIf($condition, $name, $url, $htmlOptions = array())
+    public function linkToIf($condition, $name, $url, $htmlOptions = [])
     {
         return $this->linkToUnless(!$condition, $name, $url, $htmlOptions);
     }
@@ -301,11 +306,11 @@ class Horde_View_Helper_Url extends Horde_View_Helper_Base
      *            'subject' => "This is an example email"))
      *   # => <a href="mailto:me@domain.com?cc=ccaddress@domain.com&subject=This%20is%20an%20example%20email">My email</a>
      */
-    public function mailTo($emailAddress, $name = null, $htmlOptions = array())
+    public function mailTo($emailAddress, $name = null, $htmlOptions = [])
     {
         // extra options "cc", "bcc", "subject", "body"
         $extras = '';
-        $extraParts = array('cc', 'bcc', 'body', 'subject');
+        $extraParts = ['cc', 'bcc', 'body', 'subject'];
         foreach ($extraParts as $partName) {
             if (isset($htmlOptions[$partName])) {
                 $partValue = str_replace('+', '%20', urlencode($htmlOptions[$partName]));
@@ -319,24 +324,28 @@ class Horde_View_Helper_Url extends Horde_View_Helper_Base
 
         // obfuscation options "replaceAt" and "replaceDot"
         $emailAddressObfuscated = $emailAddress;
-        foreach (array('replaceAt' => '@', 'replaceDot' => '.') as $option => $find) {
+        foreach (['replaceAt' => '@', 'replaceDot' => '.'] as $option => $find) {
             if (isset($htmlOptions[$option])) {
-                $emailAddressObfuscated = str_replace($find,
-                                                      $htmlOptions[$option],
-                                                      $emailAddressObfuscated);
+                $emailAddressObfuscated = str_replace(
+                    $find,
+                    $htmlOptions[$option],
+                    $emailAddressObfuscated
+                );
             }
             unset($htmlOptions[$option]);
         }
 
         $string = '';
 
-        $encode = isset($htmlOptions['encode']) ? $htmlOptions['encode'] : null;
+        $encode = $htmlOptions['encode'] ?? null;
         unset($htmlOptions['encode']);
 
         if ($encode == 'javascript') {
-            $name = isset($name) ? $name : $emailAddress;
-            $htmlOptions = array_merge($htmlOptions,
-                                       array('href' => "mailto:{$emailAddress}{$extras}"));
+            $name ??= $emailAddress;
+            $htmlOptions = array_merge(
+                $htmlOptions,
+                ['href' => "mailto:{$emailAddress}{$extras}"]
+            );
             $tag = $this->contentTag('a', $name, $htmlOptions);
 
             foreach (str_split("document.write('$tag');") as $c) {
@@ -361,15 +370,19 @@ class Horde_View_Helper_Url extends Horde_View_Helper_Base
                     $string .= $c;
                 }
             }
-            $name = isset($name) ? $name : $emailAddressEncoded;
-            $htmlOptions = array_merge($htmlOptions,
-                                       array('href' => $string . $extras));
+            $name ??= $emailAddressEncoded;
+            $htmlOptions = array_merge(
+                $htmlOptions,
+                ['href' => $string . $extras]
+            );
             return $this->contentTag('a', $name, $htmlOptions);
 
         } else {
-            $name = isset($name) ? $name : $emailAddressObfuscated;
-            $htmlOptions = array_merge($htmlOptions,
-                                       array('href' => "mailto:{$emailAddress}{$extras}"));
+            $name ??= $emailAddressObfuscated;
+            $htmlOptions = array_merge(
+                $htmlOptions,
+                ['href' => "mailto:{$emailAddress}{$extras}"]
+            );
             return $this->contentTag('a', $name, $htmlOptions);
         }
     }

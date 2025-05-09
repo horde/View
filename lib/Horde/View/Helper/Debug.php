@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2007-2008 Maintainable Software, LLC
  * Copyright 2006-2017 Horde LLC (http://www.horde.org/)
@@ -57,14 +58,14 @@ class Horde_View_Helper_Debug extends Horde_View_Helper_Base
      */
     public function dump(Exception $e)
     {
-        $input = array(
+        $input = [
             'type'    => get_class($e),
             'code'    => $e->getCode(),
             'message' => $e->getMessage(),
             'line'    => $e->getLine(),
             'file'    => $e->getFile(),
             'trace'   => $e->getTrace(),
-        );
+        ];
 
         // Store previous output.
         $previous_output = ob_get_contents();
@@ -122,10 +123,10 @@ class Horde_View_Helper_Debug extends Horde_View_Helper_Base
                     $r = new ReflectionFunction($f['function']);
                 }
                 return $r->getParameters();
-            } catch(Exception $e) {
+            } catch (Exception $e) {
             }
         }
-        return array();
+        return [];
     }
 
     protected function _src2lines($file)

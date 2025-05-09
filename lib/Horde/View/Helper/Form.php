@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2007-2008 Maintainable Software, LLC
  * Copyright 2008-2017 Horde LLC (http://www.horde.org/)
@@ -28,38 +29,37 @@ class Horde_View_Helper_Form extends Horde_View_Helper_Base
     public function formFor($objectName)
     {
         $args = func_get_args();
-        $options = is_array(end($args)) ? array_pop($args) : array();
+        $options = is_array(end($args)) ? array_pop($args) : [];
 
         if (isset($options['url'])) {
             $urlOptions = $options['url'];
             unset($options['url']);
         } else {
-            $urlOptions = array();
+            $urlOptions = [];
         }
 
         if (isset($options['html'])) {
             $htmlOptions = $options['html'];
             unset($options['url']);
         } else {
-            $htmlOptions = array();
+            $htmlOptions = [];
         }
         echo $this->formTag($urlOptions, $htmlOptions);
 
         $options['end'] = '</form>';
 
         $args[] = $options;
-        return call_user_func_array(array($this, 'fieldsFor'), $args);
+        return call_user_func_array([$this, 'fieldsFor'], $args);
     }
 
     public function fieldsFor($objectName)
     {
         $args = func_get_args();
-        $options = is_array(end($args)) ? array_pop($args) : array();
-        $object  = isset($args[1]) ? $args[1] : null;
+        $options = is_array(end($args)) ? array_pop($args) : [];
+        $object  = $args[1] ?? null;
 
-        $builder = isset($options['builder'])
-            ? $options['builder']
-            : Horde_View_Base::$defaultFormBuilder;
+        $builder = $options['builder']
+            ?? Horde_View_Base::$defaultFormBuilder;
 
         return new $builder($objectName, $object, $this->_view, $options);
     }
@@ -88,66 +88,70 @@ class Horde_View_Helper_Form extends Horde_View_Helper_Base
      * // => <label for="post_title" class="title_label">A short title</label>
      * </code>
      */
-    public function label($objectName, $method, $text, $options = array())
+    public function label($objectName, $method, $text, $options = [])
     {
-        $object = isset($options['object']) ? $options['object'] : null;
+        $object = $options['object'] ?? null;
         unset($options['object']);
         $tag = new $this->_instanceTag($objectName, $method, $this->_view, $object);
         return $tag->toLabelTag($text, $options);
     }
 
-    public function textField($objectName, $method, $options = array())
+    public function textField($objectName, $method, $options = [])
     {
-        $object = isset($options['object']) ? $options['object'] : null;
+        $object = $options['object'] ?? null;
         unset($options['object']);
         $tag = new $this->_instanceTag($objectName, $method, $this->_view, $object);
         return $tag->toInputFieldTag('text', $options);
     }
 
-    public function passwordField($objectName, $method, $options = array())
+    public function passwordField($objectName, $method, $options = [])
     {
-        $object = isset($options['object']) ? $options['object'] : null;
+        $object = $options['object'] ?? null;
         unset($options['object']);
         $tag = new $this->_instanceTag($objectName, $method, $this->_view, $object);
         return $tag->toInputFieldTag('password', $options);
     }
 
-    public function hiddenField($objectName, $method, $options = array())
+    public function hiddenField($objectName, $method, $options = [])
     {
-        $object = isset($options['object']) ? $options['object'] : null;
+        $object = $options['object'] ?? null;
         unset($options['object']);
         $tag = new $this->_instanceTag($objectName, $method, $this->_view, $object);
         return $tag->toInputFieldTag('hidden', $options);
     }
 
-    public function fileField($objectName, $method, $options = array())
+    public function fileField($objectName, $method, $options = [])
     {
-        $object = isset($options['object']) ? $options['object'] : null;
+        $object = $options['object'] ?? null;
         unset($options['object']);
         $tag = new $this->_instanceTag($objectName, $method, $this->_view, $object);
         return $tag->toInputFieldTag('file', $options);
     }
 
-    public function checkBox($objectName, $method, $options = array(),
-                             $checkedValue = '1', $uncheckedValue = '0')
-    {
-        $object = isset($options['object']) ? $options['object'] : null;
+    public function checkBox(
+        $objectName,
+        $method,
+        $options = [],
+        $checkedValue = '1',
+        $uncheckedValue = '0'
+    ) {
+        $object = $options['object'] ?? null;
         unset($options['object']);
         $tag = new $this->_instanceTag($objectName, $method, $this->_view, $object);
         return $tag->toCheckBoxTag($options, $checkedValue, $uncheckedValue);
     }
 
-    public function radioButton($objectName, $method, $tagValue, $options = array())
+    public function radioButton($objectName, $method, $tagValue, $options = [])
     {
-        $object = isset($options['object']) ? $options['object'] : null;
+        $object = $options['object'] ?? null;
         unset($options['object']);
         $tag = new $this->_instanceTag($objectName, $method, $this->_view, $object);
         return $tag->toRadioButtonTag($tagValue, $options);
     }
 
-    public function textArea($objectName, $method, $options = array())
+    public function textArea($objectName, $method, $options = [])
     {
-        $object = isset($options['object']) ? $options['object'] : null;
+        $object = $options['object'] ?? null;
         unset($options['object']);
         $tag = new $this->_instanceTag($objectName, $method, $this->_view, $object);
         return $tag->toTextAreaTag($options);

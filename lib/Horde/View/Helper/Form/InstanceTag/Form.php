@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2007-2008 Maintainable Software, LLC
  * Copyright 2008-2017 Horde LLC (http://www.horde.org/)
@@ -23,17 +24,16 @@
  */
 class Horde_View_Helper_Form_InstanceTag_Form extends Horde_View_Helper_Form_InstanceTag_Base
 {
-    public function toLabelTag($text, $options = array())
+    public function toLabelTag($text, $options = [])
     {
         return $this->contentTag('label', $text, $options);
     }
 
-    public function toInputFieldTag($fieldType, $options = array())
+    public function toInputFieldTag($fieldType, $options = [])
     {
         if (!isset($options['size'])) {
-            $options['size'] = isset($options['maxlength'])
-                ? $options['maxlength']
-                : $this->_defaultFieldOptions['size'];
+            $options['size'] = $options['maxlength']
+                ?? $this->_defaultFieldOptions['size'];
         }
         $options = array_merge($this->_defaultFieldOptions, $options);
 
@@ -52,7 +52,7 @@ class Horde_View_Helper_Form_InstanceTag_Form extends Horde_View_Helper_Form_Ins
         return $this->tag('input', $options);
     }
 
-    public function toRadioButtonTag($tagValue, $options = array())
+    public function toRadioButtonTag($tagValue, $options = [])
     {
         $options = array_merge($this->_defaultRadioOptions, $options);
         $options['type']  = 'radio';
@@ -64,7 +64,7 @@ class Horde_View_Helper_Form_InstanceTag_Form extends Horde_View_Helper_Form_Ins
         } else {
             $checked = $this->isRadioButtonChecked($this->value($this->object()), $tagValue);
         }
-        $options['checked'] = (boolean)$checked;
+        $options['checked'] = (bool) $checked;
 
         $prettyTagValue = strval($tagValue);
         $prettyTagValue = preg_replace('/\s/', '_', $prettyTagValue);
@@ -84,7 +84,7 @@ class Horde_View_Helper_Form_InstanceTag_Form extends Horde_View_Helper_Form_Ins
         return $this->tag('input', $options);
     }
 
-    public function toTextAreaTag($options = array())
+    public function toTextAreaTag($options = [])
     {
         $options = array_merge($this->_defaultTextAreaOptions, $options);
         $options = $this->addDefaultNameAndId($options);
@@ -93,7 +93,7 @@ class Horde_View_Helper_Form_InstanceTag_Form extends Horde_View_Helper_Form_Ins
             $size = $options['size'];
             unset($options['size']);
 
-            list($options['cols'], $options['rows']) = explode('x', $size);
+            [$options['cols'], $options['rows']] = explode('x', $size);
         }
 
         if (isset($options['value'])) {
@@ -106,9 +106,11 @@ class Horde_View_Helper_Form_InstanceTag_Form extends Horde_View_Helper_Form_Ins
         return $this->contentTag('textarea', htmlentities($value), $options);
     }
 
-    public function toCheckBoxTag($options = array(), $checkedValue = '1',
-                                  $uncheckedValue = '0')
-    {
+    public function toCheckBoxTag(
+        $options = [],
+        $checkedValue = '1',
+        $uncheckedValue = '0'
+    ) {
         $options['type'] = 'checkbox';
         $options['value'] = $checkedValue;
         if (isset($options['checked'])) {
@@ -118,13 +120,13 @@ class Horde_View_Helper_Form_InstanceTag_Form extends Horde_View_Helper_Form_Ins
         } else {
             $checked = $this->isCheckBoxChecked($this->value($this->object()), $checkedValue);
         }
-        $options['checked'] = (boolean)$checked;
+        $options['checked'] = (bool) $checked;
         $options = $this->addDefaultNameAndId($options);
 
         // Hidden must output first in PHP to not overwrite checkbox value.
-        $tags = $this->tag('input', array('name'  => $options['name'],
-                                          'type'  => 'hidden',
-                                          'value' => $uncheckedValue))
+        $tags = $this->tag('input', ['name'  => $options['name'],
+            'type'  => 'hidden',
+            'value' => $uncheckedValue])
             . $this->tag('input', $options);
 
         return $tags;
@@ -133,16 +135,16 @@ class Horde_View_Helper_Form_InstanceTag_Form extends Horde_View_Helper_Form_Ins
     protected function isCheckBoxChecked($value, $checkedValue)
     {
         switch (gettype($value)) {
-        case 'boolean':
-            return $value;
-        case 'NULL':
-            return false;
-        case 'integer':
-            return $value != 0;
-        case 'string':
-            return $value == $checkedValue;
-        default:
-            return intval($value) != 0;
+            case 'boolean':
+                return $value;
+            case 'NULL':
+                return false;
+            case 'integer':
+                return $value != 0;
+            case 'string':
+                return $value == $checkedValue;
+            default:
+                return intval($value) != 0;
         }
     }
 

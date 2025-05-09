@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2007-2008 Maintainable Software, LLC
  * Copyright 2008-2017 Horde LLC (http://www.horde.org/)
@@ -23,9 +24,9 @@
  */
 class Horde_View_Helper_FormTag extends Horde_View_Helper_Base
 {
-    public function formTag($urlForOptions = array(), $options = array()) // , *parameters_for_url
+    public function formTag($urlForOptions = [], $options = []) // , *parameters_for_url
     {
-        $htmlOptions = $this->htmlOptionsForForm($urlForOptions, $options );  // , *parameters_for_url
+        $htmlOptions = $this->htmlOptionsForForm($urlForOptions, $options);  // , *parameters_for_url
         return $this->formTagHtml($htmlOptions);
     }
 
@@ -34,110 +35,122 @@ class Horde_View_Helper_FormTag extends Horde_View_Helper_Base
         return '</form>';
     }
 
-    public function selectTag($name, $optionTags = null, $options = array())
+    public function selectTag($name, $optionTags = null, $options = [])
     {
-        return $this->contentTag('select', $optionTags,
-                                 array_merge(array('name' => $name, 'id' => $name), $options));
+        return $this->contentTag(
+            'select',
+            $optionTags,
+            array_merge(['name' => $name, 'id' => $name], $options)
+        );
     }
 
-    public function optionTag($value = null, $label = null, $selected = false, $options = array())
+    public function optionTag($value = null, $label = null, $selected = false, $options = [])
     {
-        return $this->contentTag('option', $label, array_merge(array(
+        return $this->contentTag('option', $label, array_merge([
             'selected' => $selected,
-            'value' => $value
-        ), $options));
+            'value' => $value,
+        ], $options));
     }
 
-    public function textFieldTag($name, $value = null, $options = array())
+    public function textFieldTag($name, $value = null, $options = [])
     {
-        return $this->tag('input', array_merge(array('type'  => 'text',
-                                                     'name'  => $name,
-                                                     'id'    => $name,
-                                                     'value' => $value),
-                                               $options));
+        return $this->tag('input', array_merge(
+            ['type'  => 'text',
+                'name'  => $name,
+                'id'    => $name,
+                'value' => $value],
+            $options
+        ));
     }
 
-    public function hiddenFieldTag($name, $value = null, $options = array())
+    public function hiddenFieldTag($name, $value = null, $options = [])
     {
-        return $this->textFieldTag($name, $value, array_merge($options, array('type' => 'hidden')));
+        return $this->textFieldTag($name, $value, array_merge($options, ['type' => 'hidden']));
     }
 
-    public function fileFieldTag($name, $options = array())
+    public function fileFieldTag($name, $options = [])
     {
-        return $this->textFieldTag($name, null, array_merge($options, array('type' => 'file')));
+        return $this->textFieldTag($name, null, array_merge($options, ['type' => 'file']));
     }
 
-    public function passwordFieldTag($name = 'password', $value = null, $options = array())
+    public function passwordFieldTag($name = 'password', $value = null, $options = [])
     {
-        return $this->textFieldTag($name, $value, array_merge($options, array('type' => 'password')));
+        return $this->textFieldTag($name, $value, array_merge($options, ['type' => 'password']));
     }
 
-    public function textAreaTag($name, $content = null, $options = array())
+    public function textAreaTag($name, $content = null, $options = [])
     {
         if (isset($options['size'])) {
             $size = $options['size'];
             unset($options['size']);
             if (strpos($size, 'x') !== false) {
-                list($options['cols'], $options['rows']) = explode('x', $size);
+                [$options['cols'], $options['rows']] = explode('x', $size);
             }
         }
 
-        return $this->contentTag('textarea', $content,
-                                 array_merge(array('name' => $name, 'id' => $name), $options));
+        return $this->contentTag(
+            'textarea',
+            $content,
+            array_merge(['name' => $name, 'id' => $name], $options)
+        );
     }
 
-    public function checkBoxTag($name, $value = '1', $checked = false, $options = array())
+    public function checkBoxTag($name, $value = '1', $checked = false, $options = [])
     {
-        $htmlOptions = array_merge(array('type'  => 'checkbox',
-                                         'name'  => $name,
-                                         'id'    => $name,
-                                         'value' => $value,
-                                         'checked' => $checked), $options);
+        $htmlOptions = array_merge(['type'  => 'checkbox',
+            'name'  => $name,
+            'id'    => $name,
+            'value' => $value,
+            'checked' => $checked], $options);
 
         return $this->tag('input', $htmlOptions);
     }
 
-    public function radioButtonTag($name, $value, $checked = false, $options = array())
+    public function radioButtonTag($name, $value, $checked = false, $options = [])
     {
         $prettyTagValue = preg_replace('/\s/', '_', $value);
         $prettyTagValue = Horde_String::lower(preg_replace('/(?!-)\W/', '', $prettyTagValue));
 
-        $htmlOptions = array_merge(array('type'  => 'radio',
-                                         'name'  => $name,
-                                         'id'    => "{$name}_{$prettyTagValue}",
-                                         'value' => $value,
-                                         'checked' => $checked), $options);
+        $htmlOptions = array_merge(['type'  => 'radio',
+            'name'  => $name,
+            'id'    => "{$name}_{$prettyTagValue}",
+            'value' => $value,
+            'checked' => $checked], $options);
 
         return $this->tag('input', $htmlOptions);
     }
 
-    public function submitTag($value = 'Save changes', $options = array())
+    public function submitTag($value = 'Save changes', $options = [])
     {
         if (isset($options['disableWith'])) {
             $disableWith = $options['disableWith'];
             unset($options['disableWith']);
 
-            $options['onclick'] = implode(';', array(
+            $options['onclick'] = implode(';', [
                 "this.setAttribute('originalValue', this.value)",
                 "this.disabled=true",
                 "this.value='$disableWith'",
                 "{$options['onclick']}",
                 "result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit())",
                 "if (result == false) { this.value = this.getAttribute('originalValue'); this.disabled = false }",
-                "return result"
-            ));
+                "return result",
+            ]);
         }
 
-        return $this->tag('input', array_merge(array('type' => 'submit', 'name' => 'commit', 'value' => $value),
-                                               $options));
+        return $this->tag('input', array_merge(
+            ['type' => 'submit', 'name' => 'commit', 'value' => $value],
+            $options
+        ));
     }
 
-    public function imageSubmitTag($source, $options = array())
+    public function imageSubmitTag($source, $options = [])
     {
         // source is passed to Horde_View_Helper_Asset->imagePath
-        return $this->tag('input', array_merge(array('type' => 'image',
-                                                     'src'  => $this->imagePath($source)),
-                                               $options));
+        return $this->tag('input', array_merge(
+            ['type' => 'image',
+                'src'  => $this->imagePath($source)],
+            $options
+        ));
     }
 
     private function extraTagsForForm($htmlOptions)
@@ -145,23 +158,26 @@ class Horde_View_Helper_FormTag extends Horde_View_Helper_Base
         $method = isset($htmlOptions['method']) ? Horde_String::lower($htmlOptions['method']) : '';
         if ($method == 'get') {
             $htmlOptions['method'] = 'get';
-            return array('', $htmlOptions);
-        } else if ($method == 'post' || $method == '') {
+            return ['', $htmlOptions];
+        } elseif ($method == 'post' || $method == '') {
             $htmlOptions['method'] = 'post';
-            return array('', $htmlOptions);
+            return ['', $htmlOptions];
         } else {
             $htmlOptions['method'] = 'post';
-            $extraTags = $this->contentTag('div',
-                             $this->tag('input', array('type'  => 'hidden', 'name'  => '_method',
-                                                       'value' => $method)), array('style' => 'margin:0;padding:0'));
-            return array($extraTags, $htmlOptions);
+            $extraTags = $this->contentTag(
+                'div',
+                $this->tag('input', ['type'  => 'hidden', 'name'  => '_method',
+                    'value' => $method]),
+                ['style' => 'margin:0;padding:0']
+            );
+            return [$extraTags, $htmlOptions];
         }
 
     }
 
     private function formTagHtml($htmlOptions)
     {
-        list($extraTags, $htmlOptions) = $this->extraTagsForForm($htmlOptions);
+        [$extraTags, $htmlOptions] = $this->extraTagsForForm($htmlOptions);
         return substr($this->contentTag('form', '', $htmlOptions), 0, -7)
             . $extraTags;
     }

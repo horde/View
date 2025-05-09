@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2007-2008 Maintainable Software, LLC
  * Copyright 2008-2017 Horde LLC (http://www.horde.org/)
@@ -23,10 +24,10 @@
  */
 class Horde_View_Helper_Form_InstanceTag_Base extends Horde_View_Helper_Tag
 {
-    protected $_defaultFieldOptions    = array('size' => 30);
-    protected $_defaultRadioOptions    = array();
-    protected $_defaultTextAreaOptions = array('cols' => 40, 'rows' => 20);
-    protected $_defaultDateOptions     = array('discardType' => true);
+    protected $_defaultFieldOptions    = ['size' => 30];
+    protected $_defaultRadioOptions    = [];
+    protected $_defaultTextAreaOptions = ['cols' => 40, 'rows' => 20];
+    protected $_defaultDateOptions     = ['discardType' => true];
 
     protected $objectName;
     protected $objectProperty;
@@ -35,9 +36,12 @@ class Horde_View_Helper_Form_InstanceTag_Base extends Horde_View_Helper_Tag
 
     /**
      */
-    public function __construct($objectName, $objectProperty, $view,
-                                $object = null)
-    {
+    public function __construct(
+        $objectName,
+        $objectProperty,
+        $view,
+        $object = null
+    ) {
         $this->_view = $view;
         $this->objectProperty = $objectProperty;
         $this->object = $object;

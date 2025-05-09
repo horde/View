@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2007 Maintainable Software, LLC
  * Copyright 2006-2017 Horde LLC (http://www.horde.org/)
@@ -25,16 +26,20 @@ class Horde_View_Helper_Javascript extends Horde_View_Helper_Base
 {
     public function escapeJavascript($javascript)
     {
-        return str_replace(array('\\',   "\r\n", "\r",  "\n",  '"',  "'"),
-                           array('\0\0', "\\n",  "\\n", "\\n", '\"', "\'"),
-                           $javascript);
+        return str_replace(
+            ['\\',   "\r\n", "\r",  "\n",  '"',  "'"],
+            ['\0\0', "\\n",  "\\n", "\\n", '\"', "\'"],
+            $javascript
+        );
     }
 
-    public function javascriptTag($content, $htmlOptions = array())
+    public function javascriptTag($content, $htmlOptions = [])
     {
-        return $this->contentTag('script',
-                                 $this->javascriptCdataSection($content),
-                                 array_merge($htmlOptions, array('type' => 'text/javascript')));
+        return $this->contentTag(
+            'script',
+            $this->javascriptCdataSection($content),
+            array_merge($htmlOptions, ['type' => 'text/javascript'])
+        );
     }
 
     public function javascriptCdataSection($content)

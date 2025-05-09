@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2006-2017 Horde LLC (http://www.horde.org/)
  *
@@ -23,7 +24,7 @@ class Horde_View_Helper_Block extends Horde_View_Helper_Base
      *
      * @var array
      */
-    protected $_blockCache = array();
+    protected $_blockCache = [];
 
     /**
      * Returns the title of the specified block.
@@ -37,7 +38,7 @@ class Horde_View_Helper_Block extends Horde_View_Helper_Base
      */
     public function blockTitle()
     {
-        list($block, $params) = $this->_args(func_get_args());
+        [$block, $params] = $this->_args(func_get_args());
         return $this->_block($block, $params)->getTitle();
     }
 
@@ -53,7 +54,7 @@ class Horde_View_Helper_Block extends Horde_View_Helper_Base
      */
     public function blockContent()
     {
-        list($block, $params) = $this->_args(func_get_args());
+        [$block, $params] = $this->_args(func_get_args());
         return $this->_block($block, $params)->getContent();
     }
 
@@ -68,7 +69,7 @@ class Horde_View_Helper_Block extends Horde_View_Helper_Base
      */
     protected function _block($block, $params)
     {
-        $hash = sha1(serialize(array($block, $params)));
+        $hash = sha1(serialize([$block, $params]));
 
         if (!isset($this->_blockCache[$hash])) {
             try {
@@ -106,6 +107,6 @@ class Horde_View_Helper_Block extends Horde_View_Helper_Base
         $app = array_shift($args);
         $block = array_shift($args);
 
-        return array($app, $block, $args);
+        return [$app, $block, $args];
     }
 }
