@@ -1,4 +1,16 @@
 ---
+3.0.0-alpha6:
+  api: 3.0.0-alpha1
+  state:
+    release: true
+    api: true
+  date: 2025-05-09
+  license:
+    identifier: LGPL-2.1-only
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: |
+    fix: Horde_View_Helper_Text should try to convert primitives to string before passing to htmlspecialchars()
+    style: apply php-cs-fixer
 3.0.0-alpha5:
   api: 3.0.0-alpha1
   state:
