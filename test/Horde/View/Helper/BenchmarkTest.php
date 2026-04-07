@@ -1,16 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright 2007-2026 Maintainable Software, LLC
  * Copyright 2006-2026 Horde LLC (http://www.horde.org/)
  *
- * @author     Mike Naberezny <mike@maintainable.com>
- * @author     Derek DeVries <derek@maintainable.com>
- * @author     Chuck Hagenbuch <chuck@horde.org>
- * @license    http://www.horde.org/licenses/bsd
- * @category   Horde
- * @package    View
- * @subpackage UnitTests
+ * See the enclosed file LICENSE for license information (LGPL). If you
+ * did not receive this file, see http://www.horde.org/licenses/lgpl21.
  */
 
 namespace Horde\View\Helper;
@@ -21,21 +18,18 @@ use Horde_Log_Logger;
 use Horde_View;
 use Horde_View_Helper_Benchmark;
 use Horde_View_Helper_Benchmark_Timer as Timer;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @group      view
- * @author     Mike Naberezny <mike@maintainable.com>
- * @author     Derek DeVries <derek@maintainable.com>
- * @author     Chuck Hagenbuch <chuck@horde.org>
- * @license    http://www.horde.org/licenses/bsd
- * @category   Horde
- * @package    View
- * @subpackage UnitTests
- * @coversNothing
- */
+#[Group('view')]
+#[CoversClass(Horde_View_Helper_Benchmark::class)]
+#[CoversClass(Timer::class)]
 class BenchmarkTest extends TestCase
 {
+    private Horde_View $view;
+    private Horde_Log_Handler_Mock $mock;
+
     public function setUp(): void
     {
         $this->view = new Horde_View();
@@ -45,7 +39,7 @@ class BenchmarkTest extends TestCase
         $this->view->logger = $log;
     }
 
-    public function testWithoutLogger()
+    public function testWithoutLogger(): void
     {
         $this->view = new Horde_View();
         $this->view->addHelper(new Horde_View_Helper_Benchmark($this->view));
@@ -56,43 +50,42 @@ class BenchmarkTest extends TestCase
         $this->assertNull($ret);
     }
 
-    public function testDefaults()
+    public function testDefaults(): void
     {
         $bench = $this->view->benchmark();
         $bench->end();
-        $this->assertEquals(1, count($this->mock->events));
+        $this->assertCount(1, $this->mock->events);
         $this->assertLastLogged();
     }
 
-    public function testWithMessage()
+    public function testWithMessage(): void
     {
         $bench = $this->view->benchmark('test_run');
         $bench->end();
-        $this->assertEquals(1, count($this->mock->events));
+        $this->assertCount(1, $this->mock->events);
         $this->assertLastLogged('test_run');
     }
 
-    public function testWithMessageAndLevelAsString()
+    public function testWithMessageAndLevelAsString(): void
     {
         $bench = $this->view->benchmark('debug_run', 'debug');
         $bench->end();
-        $this->assertEquals(1, count($this->mock->events));
+        $this->assertCount(1, $this->mock->events);
         $this->assertLastLogged('debug_run', 'debug');
     }
 
-    public function testWithMessageAndLevelAsInteger()
+    public function testWithMessageAndLevelAsInteger(): void
     {
         $bench = $this->view->benchmark('debug_run', Horde_Log::DEBUG);
         $bench->end();
-        $this->assertEquals(1, count($this->mock->events));
+        $this->assertCount(1, $this->mock->events);
         $this->assertLastLogged('debug_run', 'debug');
     }
 
-    public function assertLastLogged($message = 'Benchmarking', $level = 'info')
+    private function assertLastLogged(string $message = 'Benchmarking', string $level = 'info'): void
     {
         $last = end($this->mock->events);
         $this->assertEquals(strtoupper($level), $last['levelName']);
         $this->assertMatchesRegularExpression("/^$message \(.*\)$/", $last['message']);
     }
-
 }

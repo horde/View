@@ -1,43 +1,36 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright 2007-2026 Maintainable Software, LLC
  * Copyright 2008-2026 Horde LLC (http://www.horde.org/)
  *
- * @author     Mike Naberezny <mike@maintainable.com>
- * @author     Derek DeVries <derek@maintainable.com>
- * @author     Chuck Hagenbuch <chuck@horde.org>
- * @license    http://www.horde.org/licenses/bsd
- * @category   Horde
- * @package    View
- * @subpackage UnitTests
+ * See the enclosed file LICENSE for license information (LGPL). If you
+ * did not receive this file, see http://www.horde.org/licenses/lgpl21.
  */
 
 namespace Horde\View\Helper;
 
-use Horde_Test_Case;
 use Horde_View;
+use Horde_View_Helper_Tag;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\TestCase;
 
-/**
- * @group      view
- * @author     Mike Naberezny <mike@maintainable.com>
- * @author     Derek DeVries <derek@maintainable.com>
- * @author     Chuck Hagenbuch <chuck@horde.org>
- * @license    http://www.horde.org/licenses/bsd
- * @category   Horde
- * @package    View
- * @subpackage UnitTests
- * @coversNothing
- */
-class TagTest extends Horde_Test_Case
+#[Group('view')]
+#[CoversClass(Horde_View_Helper_Tag::class)]
+class TagTest extends TestCase
 {
+    private Horde_View $view;
+
     public function setUp(): void
     {
         $this->view = new Horde_View();
         $this->view->addHelper('Tag');
     }
 
-    public function testTag()
+    public function testTag(): void
     {
         $this->assertEquals('<br />', $this->view->tag('br'));
         $this->assertEquals(
@@ -46,7 +39,7 @@ class TagTest extends Horde_Test_Case
         );
     }
 
-    public function testTagOptions()
+    public function testTagOptions(): void
     {
         $this->assertMatchesRegularExpression(
             '/\A<p class="(show|elsewhere)" \\/>\z/',
@@ -55,7 +48,7 @@ class TagTest extends Horde_Test_Case
         );
     }
 
-    public function testTagOptionsRejectsNullOption()
+    public function testTagOptionsRejectsNullOption(): void
     {
         $this->assertEquals(
             '<p />',
@@ -63,7 +56,7 @@ class TagTest extends Horde_Test_Case
         );
     }
 
-    public function testTagOptionsAcceptsBlankOption()
+    public function testTagOptionsAcceptsBlankOption(): void
     {
         $this->assertEquals(
             '<p included="" />',
@@ -71,7 +64,7 @@ class TagTest extends Horde_Test_Case
         );
     }
 
-    public function testTagOptionsConvertsBooleanOption()
+    public function testTagOptionsConvertsBooleanOption(): void
     {
         $this->assertEquals(
             '<p disabled multiple readonly />',
@@ -81,7 +74,7 @@ class TagTest extends Horde_Test_Case
         );
     }
 
-    public function testContentTag()
+    public function testContentTag(): void
     {
         $this->assertEquals(
             '<a href="create">Create</a>',
@@ -89,17 +82,17 @@ class TagTest extends Horde_Test_Case
         );
     }
 
-    public function testCdataSection()
+    public function testCdataSection(): void
     {
         $this->assertEquals('<![CDATA[<hello world>]]>', $this->view->cdataSection('<hello world>'));
     }
 
-    public function testEscapeOnce()
+    public function testEscapeOnce(): void
     {
         $this->assertEquals('1 &lt; 2 &amp; 3', $this->view->escapeOnce('1 < 2 &amp; 3'));
     }
 
-    public function testDoubleEscapingAttributes()
+    public function testDoubleEscapingAttributes(): void
     {
         $attributes = ['1&amp;2', '1 &lt; 2', '&#8220;test&#8220;'];
         foreach ($attributes as $escaped) {
@@ -110,7 +103,7 @@ class TagTest extends Horde_Test_Case
         }
     }
 
-    public function testSkipInvalidEscapedAttributes()
+    public function testSkipInvalidEscapedAttributes(): void
     {
         $attributes = ['&1;', '&#1dfa3;', '& #123;'];
         foreach ($attributes as $escaped) {
@@ -120,5 +113,4 @@ class TagTest extends Horde_Test_Case
             );
         }
     }
-
 }

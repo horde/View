@@ -12,12 +12,12 @@ declare(strict_types=1);
 
 namespace Horde\View\Mock;
 
-use Horde_View_Helper_Base;
+use Horde_View_Helper_Url;
 
-class UrlHelper extends Horde_View_Helper_Base
+class FormTagUrlHelper extends Horde_View_Helper_Url
 {
-    public function urlFor($options)
+    public function urlFor($first = [], $second = [])
     {
-        return 'http://www.example.com';
+        return $first ? parent::urlFor($first, $second) : 'http://www.example.com';
     }
 }

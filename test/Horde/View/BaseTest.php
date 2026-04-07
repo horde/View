@@ -1,253 +1,280 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright 2007-2026 Maintainable Software, LLC
  * Copyright 2008-2026 Horde LLC (http://www.horde.org/)
  *
- * @author     Mike Naberezny <mike@maintainable.com>
- * @author     Derek DeVries <derek@maintainable.com>
- * @author     Chuck Hagenbuch <chuck@horde.org>
- * @license    http://www.horde.org/licenses/bsd
- * @category   Horde
- * @package    View
- * @subpackage UnitTests
+ * See the enclosed file LICENSE for license information (LGPL). If you
+ * did not receive this file, see http://www.horde.org/licenses/lgpl21.
  */
 
 namespace Horde\View;
 
-use Horde_Test_Case as TestCase;
 use Horde_View;
+use Horde_View_Base;
 use Horde_View_Helper_Base;
 use Horde_View_Helper_Text;
-use Horde_View_Helper_Date;
 use Horde_View_Exception as ViewException;
-use Exception as Exception;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\TestCase;
 
-/**
- * @group      view
- * @author     Mike Naberezny <mike@maintainable.com>
- * @author     Derek DeVries <derek@maintainable.com>
- * @author     Chuck Hagenbuch <chuck@horde.org>
- * @license    http://www.horde.org/licenses/bsd
- * @category   Horde
- * @package    View
- * @subpackage UnitTests
- * @coversNothing
- */
+#[Group('view')]
+#[CoversClass(Horde_View::class)]
+#[CoversClass(Horde_View_Base::class)]
 class BaseTest extends TestCase
 {
-    protected $_view = null;
+    private Horde_View $view;
 
     public function setUp(): void
     {
-        $this->_view = new Horde_View();
-        $this->_view->addTemplatePath(__DIR__ . '/fixtures/');
+        $this->view = new Horde_View();
+        $this->view->addTemplatePath(__DIR__ . '/fixtures/');
     }
 
-    /*##########################################################################
-    # Assignment
-    ##########################################################################*/
+    // --- Assignment ---
 
-    // test setting/getting dynamic properties
-    public function testSet()
+    public function testSet(): void
     {
-        $this->_view->publicVar = 'test';
-        $this->assertEquals('test', $this->_view->publicVar);
+        $this->view->publicVar = 'test';
+        $this->assertEquals('test', $this->view->publicVar);
     }
 
-    public function testAssign()
+    public function testAssign(): void
     {
-        $this->_view->assign(['publicVar' => 'test']);
-        $this->assertEquals('test', $this->_view->publicVar);
+        $this->view->assign(['publicVar' => 'test']);
+        $this->assertEquals('test', $this->view->publicVar);
     }
 
-    public function testAssignDoesntOverridePrivateVariables()
+    public function testAssignDoesntOverridePrivateVariables(): void
     {
         $this->expectException(ViewException::class);
-        $this->_view->assign(['_templatePath' => 'test']);
+        $this->view->assign(['_templatePath' => 'test']);
     }
 
-    public function testAssignAllowsUnderscoreVariables()
+    public function testAssignAllowsUnderscoreVariables(): void
     {
-        $this->_view->assign(['_private' => 'test']);
-        $this->assertEquals('test', $this->_view->_private);
+        $this->view->assign(['_private' => 'test']);
+        $this->assertEquals('test', $this->view->_private);
     }
 
-    // test accessing variable
-    public function testAccessVar()
+    public function testAccessVar(): void
     {
-        $this->_view->testVar = 'test';
-        $this->assertTrue(!empty($this->_view->testVar));
+        $this->view->testVar = 'test';
+        $this->assertTrue(!empty($this->view->testVar));
 
-        $this->_view->testVar2 = '';
-        $this->assertTrue(empty($this->_view->testVar2));
+        $this->view->testVar2 = '';
+        $this->assertTrue(empty($this->view->testVar2));
 
-        $this->assertTrue(isset($this->_view->testVar2));
-        $this->assertTrue(!isset($this->_view->testVar3));
+        $this->assertTrue(isset($this->view->testVar2));
+        $this->assertTrue(!isset($this->view->testVar3));
     }
 
-    // test adding a template path
-    public function testAddTemplatePath()
+    // --- Template Paths ---
+
+    public function testAddTemplatePath(): void
     {
-        $this->_view->addTemplatePath('app/views/shared/');
+        $this->view->addTemplatePath('app/views/shared/');
 
         $expected = ['app/views/shared/',
             __DIR__ . '/fixtures/',
             './'];
-        $this->assertEquals($expected, $this->_view->getTemplatePaths());
+        $this->assertEquals($expected, $this->view->getTemplatePaths());
     }
 
-    // test adding a template path
-    public function testAddTemplatePathAddSlash()
+    public function testAddTemplatePathAddSlash(): void
     {
-        $this->_view->addTemplatePath('app/views/shared');
+        $this->view->addTemplatePath('app/views/shared');
         $expected = ['app/views/shared/',
             __DIR__ . '/fixtures/',
             './'];
-        $this->assertEquals($expected, $this->_view->getTemplatePaths());
+        $this->assertEquals($expected, $this->view->getTemplatePaths());
     }
 
-
-    /*##########################################################################
-    # Rendering
-    ##########################################################################*/
-
-    // test rendering
-    public function testRender()
+    public function testSetTemplatePath(): void
     {
-        $this->_view->myVar = 'test';
-
-        $expected = "<div>test</div>";
-        $this->assertEquals($expected, $this->_view->render('testRender.html.php'));
+        $this->view->setTemplatePath('/some/path');
+        $this->assertEquals(['/some/path/'], $this->view->getTemplatePaths());
     }
 
-    // test rendering
-    public function testRenderNoExtension()
-    {
-        $this->_view->myVar = 'test';
+    // --- Constructor ---
 
-        $expected = "<div>test</div>";
-        $this->assertEquals($expected, $this->_view->render('testRender'));
+    public function testConstructorWithEncoding(): void
+    {
+        $view = new Horde_View(['encoding' => 'ISO-8859-1']);
+        $this->assertEquals('ISO-8859-1', $view->getEncoding());
     }
 
-    // test that the
-    public function testRenderPathOrder()
+    public function testConstructorWithTemplatePath(): void
     {
-        $this->_view->myVar = 'test';
+        $view = new Horde_View(['templatePath' => '/custom/path']);
+        $paths = $view->getTemplatePaths();
+        $this->assertEquals('/custom/path/', $paths[0]);
+    }
 
-        // we should be rendering the testRender.html in fixtures/
+    // --- Encoding ---
+
+    public function testGetSetEncoding(): void
+    {
+        $this->assertEquals('UTF-8', $this->view->getEncoding());
+        $this->view->setEncoding('ISO-8859-1');
+        $this->assertEquals('ISO-8859-1', $this->view->getEncoding());
+    }
+
+    // --- Rendering ---
+
+    public function testRender(): void
+    {
+        $this->view->myVar = 'test';
+
         $expected = "<div>test</div>";
-        $this->assertEquals($expected, $this->_view->render('testRender'));
+        $this->assertEquals($expected, $this->view->render('testRender.html.php'));
+    }
 
-        // after we specify the 'subdir' path, it should read from subdir path first
-        $this->_view->addTemplatePath(__DIR__ . '/fixtures/subdir/');
+    public function testRenderNoExtension(): void
+    {
+        $this->view->myVar = 'test';
+
+        $expected = "<div>test</div>";
+        $this->assertEquals($expected, $this->view->render('testRender'));
+    }
+
+    public function testRenderPathOrder(): void
+    {
+        $this->view->myVar = 'test';
+
+        $expected = "<div>test</div>";
+        $this->assertEquals($expected, $this->view->render('testRender'));
+
+        $this->view->addTemplatePath(__DIR__ . '/fixtures/subdir/');
         $expected = "<div>subdir test</div>";
-        $this->assertEquals($expected, $this->_view->render('testRender'));
+        $this->assertEquals($expected, $this->view->render('testRender'));
     }
 
-
-    /*##########################################################################
-    # Partials
-    ##########################################################################*/
-
-    // test rendering partial
-    public function testRenderPartial()
+    public function testRenderMissingTemplateThrows(): void
     {
-        $this->_view->myVar1 = 'main';
-        $this->_view->myVar2 = 'partial';
+        $this->expectException(ViewException::class);
+        $this->view->render('nonExistentTemplate');
+    }
+
+    // --- Partials ---
+
+    public function testRenderPartial(): void
+    {
+        $this->view->myVar1 = 'main';
+        $this->view->myVar2 = 'partial';
 
         $expected = '<div>main<p>partial</p></div>';
-        $this->assertEquals($expected, $this->_view->render('testPartial'));
+        $this->assertEquals($expected, $this->view->render('testPartial'));
     }
 
-    // test rendering partial with object passed in
-    public function testRenderPartialObject()
+    public function testRenderPartialObject(): void
     {
-        $this->_view->myObject = (object) ['string_value' => 'hello world'];
+        $this->view->myObject = (object) ['string_value' => 'hello world'];
         $expected = '<div><p>hello world</p></div>';
-        $this->assertEquals($expected, $this->_view->render('testPartialObject'));
+        $this->assertEquals($expected, $this->view->render('testPartialObject'));
     }
 
-    // test rendering partial with locals passed in
-    public function testRenderPartialLocals()
+    public function testRenderPartialLocals(): void
     {
         $expected = '<div><p>hello world</p></div>';
-        $this->assertEquals($expected, $this->_view->render('testPartialLocals'));
+        $this->assertEquals($expected, $this->view->render('testPartialLocals'));
     }
 
-    // test rendering partial with collection passed in
-    public function testRenderPartialCollection()
+    public function testRenderPartialCollection(): void
     {
-        $this->_view->myObjects = [(object) ['string_value' => 'hello'],
+        $this->view->myObjects = [(object) ['string_value' => 'hello'],
             (object) ['string_value' => 'world']];
         $expected = '<div><p>hello</p><p>world</p></div>';
-        $this->assertEquals($expected, $this->_view->render('testPartialCollection'));
+        $this->assertEquals($expected, $this->view->render('testPartialCollection'));
     }
 
-    // test rendering partial with empty set as collection
-    public function testRenderPartialCollectionEmpty()
+    public function testRenderPartialCollectionEmpty(): void
     {
-        $this->_view->myObjects = null;
+        $this->view->myObjects = null;
 
         $expected = '<div></div>';
-        $this->assertEquals($expected, $this->_view->render('testPartialCollection'));
+        $this->assertEquals($expected, $this->view->render('testPartialCollection'));
     }
 
-    // test rendering partial with empty array as collection
-    public function testRenderPartialCollectionEmptyArray()
+    public function testRenderPartialCollectionEmptyArray(): void
     {
-        $this->_view->myObjects = [];
+        $this->view->myObjects = [];
 
         $expected = '<div></div>';
-        $this->assertEquals($expected, $this->_view->render('testPartialCollection'));
+        $this->assertEquals($expected, $this->view->render('testPartialCollection'));
     }
 
-    // partial collection is a model collection
-    public function testRenderPartialModelCollection()
+    public function testRenderPartialModelCollection(): void
     {
-        $this->_view->myObjects = [(object) ['string_value' => 'name a'], (object) ['string_value' => 'name b']];
+        $this->view->myObjects = [(object) ['string_value' => 'name a'], (object) ['string_value' => 'name b']];
 
         $expected = '<div><p>name a</p><p>name b</p></div>';
-        $this->assertEquals($expected, $this->_view->render('testPartialCollection'));
+        $this->assertEquals($expected, $this->view->render('testPartialCollection'));
     }
 
+    // --- Escape output ---
 
-    /*##########################################################################
-    # Escape output
-    ##########################################################################*/
-
-    public function testEscapeTemplate()
+    public function testEscapeTemplate(): void
     {
-        $this->_view->myVar = '"escaping"';
-        $this->_view->addHelper(new Horde_View_Helper_Text($this->_view));
+        $this->view->myVar = '"escaping"';
+        $this->view->addHelper(new Horde_View_Helper_Text($this->view));
 
         $expected = "<div>test &quot;escaping&quot; quotes</div>";
-        $this->assertEquals($expected, $this->_view->render('testEscape'));
+        $this->assertEquals($expected, $this->view->render('testEscape'));
     }
 
-    // test adding a helper
-    public function testAddHorde_View_Helper_Text()
+    // --- Helpers ---
+
+    public function testAddHelperAndCallMethod(): void
     {
         $str = 'The quick brown fox jumps over the lazy dog tomorrow morning.';
 
-        // helper doesn't exist
         $this->expectException(ViewException::class);
-        $this->_view->truncateMiddle($str, 40);
-
-        // add text helper
-        $this->_view->addHelper(new Horde_View_Helper_Text($this->_view));
-        $expected = 'The quick brown fox...tomorrow morning.';
-        $this->assertEquals($expected, $this->_view->truncateMiddle($str, 40));
+        $this->view->truncateMiddle($str, 40);
     }
 
-    // test adding a helper where methods conflict
-    public function testAddHorde_View_Helper_TextMethodOverwrite()
+    public function testAddHelperMethodOverwrite(): void
     {
-        // add text helper
-        $this->_view->addHelper(new Horde_View_Helper_Text($this->_view));
+        $this->view->addHelper(new Horde_View_Helper_Text($this->view));
 
-        // successful when trying to add it again
-        $ret = $this->_view->addHelper(new Horde_View_Helper_Text($this->_view));
+        $ret = $this->view->addHelper(new Horde_View_Helper_Text($this->view));
         $this->assertInstanceOf(Horde_View_Helper_Base::class, $ret);
+    }
+
+    public function testAddHelperByClassName(): void
+    {
+        $this->view->addHelper('Text');
+        $str = 'The quick brown fox jumps over the lazy dog tomorrow morning.';
+        $expected = 'The quick brown fox...tomorrow morning.';
+        $this->assertEquals($expected, $this->view->truncateMiddle($str, 40));
+    }
+
+    public function testAddHelperNonExistentClassThrows(): void
+    {
+        $this->expectException(ViewException::class);
+        $this->view->addHelper('NonExistentHelper12345');
+    }
+
+    public function testCallNonExistentHelperThrows(): void
+    {
+        $this->expectException(ViewException::class);
+        $this->view->someNonExistentMethod();
+    }
+
+    public function testThrowOnHelperCollision(): void
+    {
+        $this->view->addHelper(new Horde_View_Helper_Text($this->view));
+        $this->view->throwOnHelperCollision();
+
+        $this->expectException(ViewException::class);
+        $this->view->addHelper(new Horde_View_Helper_Text($this->view));
+    }
+
+    public function testGetUndefinedPropertyReturnsNull(): void
+    {
+        $this->assertNull($this->view->undefinedProperty);
     }
 }

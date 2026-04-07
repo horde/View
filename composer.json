@@ -25,7 +25,6 @@
         "horde/util": "^3 || dev-FRAMEWORK_6_0"
     },
     "require-dev": {
-        "horde/test": "^3 || dev-FRAMEWORK_6_0",
         "horde/log": "^3 || dev-FRAMEWORK_6_0"
     },
     "suggest": {
@@ -40,10 +39,11 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Horde\\View\\Test\\": "test/"
+            "Horde\\View\\": "test/Horde/View/"
         }
     },
     "config": {
         "allow-plugins": {}
-    }
+    },
+    "minimum-stability": "dev"
 }

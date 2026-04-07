@@ -1,43 +1,35 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright 2007-2026 Maintainable Software, LLC
  * Copyright 2008-2026 Horde LLC (http://www.horde.org/)
  *
- * @author     Mike Naberezny <mike@maintainable.com>
- * @author     Derek DeVries <derek@maintainable.com>
- * @author     Chuck Hagenbuch <chuck@horde.org>
- * @license    http://www.horde.org/licenses/bsd
- * @category   Horde
- * @package    View
- * @subpackage UnitTests
+ * See the enclosed file LICENSE for license information (LGPL). If you
+ * did not receive this file, see http://www.horde.org/licenses/lgpl21.
  */
 
 namespace Horde\View\Helper;
 
 use Horde_View;
-use Horde_Test_Case;
 use Horde_View_Helper_Number;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\TestCase;
 
-/**
- * @group      view
- * @author     Mike Naberezny <mike@maintainable.com>
- * @author     Derek DeVries <derek@maintainable.com>
- * @author     Chuck Hagenbuch <chuck@horde.org>
- * @license    http://www.horde.org/licenses/bsd
- * @category   Horde
- * @package    View
- * @subpackage UnitTests
- * @coversNothing
- */
-class NumberTest extends Horde_Test_Case
+#[Group('view')]
+#[CoversClass(Horde_View_Helper_Number::class)]
+class NumberTest extends TestCase
 {
+    private Horde_View_Helper_Number $helper;
+
     public function setUp(): void
     {
         $this->helper = new Horde_View_Helper_Number(new Horde_View());
     }
 
-    public function testNumberToHumanSize()
+    public function testNumberToHumanSize(): void
     {
         setlocale(LC_NUMERIC, 'C');
         $this->assertEquals('0 Bytes', $this->helper->numberToHumanSize(0));
@@ -60,5 +52,4 @@ class NumberTest extends Horde_Test_Case
         $this->assertNull($this->helper->numberToHumanSize('x'));
         $this->assertNull($this->helper->numberToHumanSize(null));
     }
-
 }

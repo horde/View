@@ -1,25 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright 2007-2026 Maintainable Software, LLC
  * Copyright 2008-2026 Horde LLC (http://www.horde.org/)
  *
- * @author     Mike Naberezny <mike@maintainable.com>
- * @author     Derek DeVries <derek@maintainable.com>
- * @author     Chuck Hagenbuch <chuck@horde.org>
- * @license    http://www.horde.org/licenses/bsd
- * @category   Horde
- * @package    View
- * @subpackage UnitTests
+ * See the enclosed file LICENSE for license information (LGPL). If you
+ * did not receive this file, see http://www.horde.org/licenses/lgpl21.
  */
 
 namespace Horde\View\Mock;
 
 use Horde_View_Helper_Form_Builder;
 
-/**
- * Mock for a Form builder
- */
 class Builder extends Horde_View_Helper_Form_Builder
 {
     public function foo()

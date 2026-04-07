@@ -1,36 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright 2007-2026 Maintainable Software, LLC
  * Copyright 2006-2026 Horde LLC (http://www.horde.org/)
  *
- * @author     Mike Naberezny <mike@maintainable.com>
- * @author     Derek DeVries <derek@maintainable.com>
- * @author     Chuck Hagenbuch <chuck@horde.org>
- * @license    http://www.horde.org/licenses/bsd
- * @category   Horde
- * @package    View
- * @subpackage UnitTests
+ * See the enclosed file LICENSE for license information (LGPL). If you
+ * did not receive this file, see http://www.horde.org/licenses/lgpl21.
  */
 
 namespace Horde\View\Helper;
 
-use Horde_Test_Case;
 use Horde_View;
+use Horde_View_Helper_Javascript;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\TestCase;
 
-/**
- * @group      view
- * @author     Mike Naberezny <mike@maintainable.com>
- * @author     Derek DeVries <derek@maintainable.com>
- * @author     Chuck Hagenbuch <chuck@horde.org>
- * @license    http://www.horde.org/licenses/bsd
- * @category   Horde
- * @package    View
- * @subpackage UnitTests
- * @coversNothing
- */
-class JavascriptTest extends Horde_Test_Case
+#[Group('view')]
+#[CoversClass(Horde_View_Helper_Javascript::class)]
+class JavascriptTest extends TestCase
 {
+    private Horde_View $view;
+
     public function setUp(): void
     {
         $this->view = new Horde_View();
@@ -38,7 +31,7 @@ class JavascriptTest extends Horde_Test_Case
         $this->view->addHelper('Tag');
     }
 
-    public function testJavascriptTag()
+    public function testJavascriptTag(): void
     {
         $this->assertEquals(
             "<script type=\"text/javascript\">\n//<![CDATA[\nfoo = 1;\n//]]>\n</script>",
@@ -46,4 +39,22 @@ class JavascriptTest extends Horde_Test_Case
         );
     }
 
+    public function testEscapeJavascript(): void
+    {
+        // Backslash is replaced with \0\0 per the implementation
+        $this->assertEquals('\0\0', $this->view->escapeJavascript('\\'));
+        $this->assertEquals('\\n', $this->view->escapeJavascript("\n"));
+        $this->assertEquals('\\n', $this->view->escapeJavascript("\r\n"));
+        $this->assertEquals('\\n', $this->view->escapeJavascript("\r"));
+        $this->assertEquals('\\"', $this->view->escapeJavascript('"'));
+        $this->assertEquals("\\'", $this->view->escapeJavascript("'"));
+    }
+
+    public function testJavascriptCdataSection(): void
+    {
+        $this->assertEquals(
+            "\n//<![CDATA[\nfoo = 1;\n//]]>\n",
+            $this->view->javascriptCdataSection('foo = 1;')
+        );
+    }
 }

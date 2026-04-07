@@ -1,42 +1,35 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright 2007-2026 Maintainable Software, LLC
  * Copyright 2008-2026 Horde LLC (http://www.horde.org/)
  *
- * @author     Mike Naberezny <mike@maintainable.com>
- * @author     Derek DeVries <derek@maintainable.com>
- * @author     Chuck Hagenbuch <chuck@horde.org>
- * @license    http://www.horde.org/licenses/bsd
- * @category   Horde
- * @package    View
- * @subpackage UnitTests
+ * See the enclosed file LICENSE for license information (LGPL). If you
+ * did not receive this file, see http://www.horde.org/licenses/lgpl21.
  */
 
 namespace Horde\View\Helper;
 
 use Horde_View;
 use Horde_View_Base;
-use Helper;
-use Horde_Test_Case;
-use Horde_View_Helper_Base;
+use Horde_View_Helper_Form;
 use Horde_View_Helper_Form_Builder;
 use Horde\View\Mock\Builder;
 use Horde\View\Mock\UrlHelper;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\TestCase;
 
-/**
- * @group      view
- * @author     Mike Naberezny <mike@maintainable.com>
- * @author     Derek DeVries <derek@maintainable.com>
- * @author     Chuck Hagenbuch <chuck@horde.org>
- * @license    http://www.horde.org/licenses/bsd
- * @category   Horde
- * @package    View
- * @subpackage UnitTests
- * @coversNothing
- */
-class FormTest extends Horde_Test_Case
+#[Group('view')]
+#[CoversClass(Horde_View_Helper_Form::class)]
+#[CoversClass(Horde_View_Helper_Form_Builder::class)]
+class FormTest extends TestCase
 {
+    private Horde_View $view;
+    private object $post;
+
     public function setUp(): void
     {
         $this->view = new Horde_View();
@@ -58,7 +51,7 @@ class FormTest extends Horde_Test_Case
         $this->view->post = $this->post;
     }
 
-    public function testTextField()
+    public function testTextField(): void
     {
         $this->assertEquals(
             '<input id="post_title" name="post[title]" size="30" type="text" value="Hello World" />',
@@ -76,7 +69,7 @@ class FormTest extends Horde_Test_Case
         );
     }
 
-    public function testTextFieldWithEscapes()
+    public function testTextFieldWithEscapes(): void
     {
         $this->post->title = '<b>Hello World</b>';
         $this->assertEquals(
@@ -85,19 +78,19 @@ class FormTest extends Horde_Test_Case
         );
     }
 
-    public function testTextFieldWithOptions()
+    public function testTextFieldWithOptions(): void
     {
         $expected = '<input id="post_title" name="post[title]" size="35" type="text" value="Hello World" />';
         $this->assertEquals($expected, $this->view->textField('post', 'title', ['size' => 35]));
     }
 
-    public function testTextFieldAssumingSize()
+    public function testTextFieldAssumingSize(): void
     {
         $expected = '<input id="post_title" maxlength="35" name="post[title]" size="35" type="text" value="Hello World" />';
         $this->assertEquals($expected, $this->view->textField('post', 'title', ['maxlength' => 35]));
     }
 
-    public function testTextFieldDoesntChangeParamValues()
+    public function testTextFieldDoesntChangeParamValues(): void
     {
         $objectName = 'post[]';
         $expected = '<input id="post_123_title" name="post[123][title]" size="30" type="text" value="Hello World" />';
@@ -105,7 +98,7 @@ class FormTest extends Horde_Test_Case
         $this->assertEquals($objectName, 'post[]');
     }
 
-    public function testCheckBox()
+    public function testCheckBox(): void
     {
         $this->assertEquals(
             '<input name="post[secret]" type="hidden" value="0" /><input checked id="post_secret" name="post[secret]" type="checkbox" value="1" />',
@@ -132,7 +125,7 @@ class FormTest extends Horde_Test_Case
         );
     }
 
-    public function testCheckBoxWithExplicitCheckedAndUncheckedValues()
+    public function testCheckBoxWithExplicitCheckedAndUncheckedValues(): void
     {
         $this->post->secret = 'on';
 
@@ -142,7 +135,7 @@ class FormTest extends Horde_Test_Case
         );
     }
 
-    public function testRadioButton()
+    public function testRadioButton(): void
     {
         $this->assertEquals(
             '<input checked id="post_title_hello_world" name="post[title]" type="radio" value="Hello World" />',
@@ -155,7 +148,7 @@ class FormTest extends Horde_Test_Case
         );
     }
 
-    public function testRadioButtonIsCheckedWithIntegers()
+    public function testRadioButtonIsCheckedWithIntegers(): void
     {
         $this->assertEquals(
             '<input checked id="post_secret_1" name="post[secret]" type="radio" value="1" />',
@@ -163,7 +156,7 @@ class FormTest extends Horde_Test_Case
         );
     }
 
-    public function testRadioButtonRespectsPassedInId()
+    public function testRadioButtonRespectsPassedInId(): void
     {
         $this->assertEquals(
             '<input checked id="foo" name="post[secret]" type="radio" value="1" />',
@@ -171,7 +164,7 @@ class FormTest extends Horde_Test_Case
         );
     }
 
-    public function testTextArea()
+    public function testTextArea(): void
     {
         $this->assertEquals(
             '<textarea cols="40" id="post_body" name="post[body]" rows="20">Back to the hill and over it again!</textarea>',
@@ -179,7 +172,7 @@ class FormTest extends Horde_Test_Case
         );
     }
 
-    public function testTextAreaWithEscapes()
+    public function testTextAreaWithEscapes(): void
     {
         $this->post->body = "Back to <i>the</i> hill and over it again!";
         $this->assertEquals(
@@ -188,7 +181,7 @@ class FormTest extends Horde_Test_Case
         );
     }
 
-    public function testTextAreaWithAlternateValue()
+    public function testTextAreaWithAlternateValue(): void
     {
         $this->assertEquals(
             '<textarea cols="40" id="post_body" name="post[body]" rows="20">Testing alternate values.</textarea>',
@@ -196,7 +189,7 @@ class FormTest extends Horde_Test_Case
         );
     }
 
-    public function testTextAreaWithSizeOption()
+    public function testTextAreaWithSizeOption(): void
     {
         $this->assertEquals(
             '<textarea cols="183" id="post_body" name="post[body]" rows="820">Back to the hill and over it again!</textarea>',
@@ -204,7 +197,7 @@ class FormTest extends Horde_Test_Case
         );
     }
 
-    public function testExplicitName()
+    public function testExplicitName(): void
     {
         $this->assertEquals(
             '<input id="post_title" name="dont guess" size="30" type="text" value="Hello World" />',
@@ -222,7 +215,7 @@ class FormTest extends Horde_Test_Case
         );
     }
 
-    public function testExplicitId()
+    public function testExplicitId(): void
     {
         $this->assertEquals(
             '<input id="dont guess" name="post[title]" size="30" type="text" value="Hello World" />',
@@ -240,7 +233,7 @@ class FormTest extends Horde_Test_Case
         );
     }
 
-    public function testAutoIndex()
+    public function testAutoIndex(): void
     {
         $pid = $this->post->id;
 
@@ -270,7 +263,7 @@ class FormTest extends Horde_Test_Case
         );
     }
 
-    public function testFormFor()
+    public function testFormFor(): void
     {
         ob_start();
         $form = $this->view->formFor('post', $this->post, ['html' => ['id' => 'create-post']]);
@@ -292,7 +285,7 @@ class FormTest extends Horde_Test_Case
         $this->assertEquals($expected, ob_get_clean());
     }
 
-    public function testFormForWithMethod()
+    public function testFormForWithMethod(): void
     {
         ob_start();
         $form = $this->view->formFor('post', $this->post, ['html' => ['id'     => 'create-post',
@@ -314,7 +307,7 @@ class FormTest extends Horde_Test_Case
         $this->assertEquals($expected, ob_get_clean());
     }
 
-    public function testFormForWithoutObject()
+    public function testFormForWithoutObject(): void
     {
         ob_start();
         $form = $this->view->formFor('post', ['html' => ['id' => 'create-post']]);
@@ -334,7 +327,7 @@ class FormTest extends Horde_Test_Case
         $this->assertEquals($expected, ob_get_clean());
     }
 
-    public function testFormForWithIndex()
+    public function testFormForWithIndex(): void
     {
         ob_start();
         $form = $this->view->formFor('post[]', $this->post);
@@ -354,7 +347,7 @@ class FormTest extends Horde_Test_Case
         $this->assertEquals($expected, ob_get_clean());
     }
 
-    public function testFieldsFor()
+    public function testFieldsFor(): void
     {
         ob_start();
         $fields = $this->view->fieldsFor('post', $this->post);
@@ -372,7 +365,7 @@ class FormTest extends Horde_Test_Case
         $this->assertEquals($expected, ob_get_clean());
     }
 
-    public function testNestedFieldsFor()
+    public function testNestedFieldsFor(): void
     {
         ob_start();
         $form = $this->view->formFor('post', $this->post);
@@ -389,7 +382,7 @@ class FormTest extends Horde_Test_Case
         $this->assertEquals($expected, ob_get_clean());
     }
 
-    public function testFieldsForWithoutObject()
+    public function testFieldsForWithoutObject(): void
     {
         ob_start();
         $fields = $this->view->fieldsFor('post');
@@ -407,7 +400,7 @@ class FormTest extends Horde_Test_Case
         $this->assertEquals($expected, ob_get_clean());
     }
 
-    public function testFieldsForObjectWithBracketedName()
+    public function testFieldsForObjectWithBracketedName(): void
     {
         ob_start();
         $fields = $this->view->fieldsFor('author[post]', $this->post);
@@ -420,13 +413,13 @@ class FormTest extends Horde_Test_Case
         );
     }
 
-    public function testFormBuilderDoesNotHaveFormForMethod()
+    public function testFormBuilderDoesNotHaveFormForMethod(): void
     {
-        $methods = get_class_methods('Horde_View_Helper_Form_Builder');
+        $methods = get_class_methods(Horde_View_Helper_Form_Builder::class);
         $this->assertTrue(empty($methods['formFor']));
     }
 
-    public function testFormForAndFieldsFor()
+    public function testFormForAndFieldsFor(): void
     {
         ob_start();
         $postForm = $this->view->formFor('post', $this->post, ['html' => ['id' => 'create-post']]);
@@ -449,7 +442,7 @@ class FormTest extends Horde_Test_Case
         $this->assertEquals($expected, ob_get_clean());
     }
 
-    public function testFormForWithCustomBuilder()
+    public function testFormForWithCustomBuilder(): void
     {
         ob_start();
         $form = $this->view->formFor('post', $this->post, ['builder' => Builder::class]);
@@ -465,7 +458,7 @@ class FormTest extends Horde_Test_Case
         $this->assertEquals($expected, ob_get_clean());
     }
 
-    public function testDefaultFormBuilder()
+    public function testDefaultFormBuilder(): void
     {
         $oldDefaultFormBuilder = Horde_View_Base::$defaultFormBuilder;
         Horde_View_Base::$defaultFormBuilder = Builder::class;
@@ -483,16 +476,12 @@ class FormTest extends Horde_Test_Case
                 . '<foo /></form>';
 
             $this->assertEquals($expected, ob_get_clean());
-        } catch (Exception $e) {
+        } finally {
+            Horde_View_Base::$defaultFormBuilder = $oldDefaultFormBuilder;
         }
-
-        Horde_View_Base::$defaultFormBuilder = $oldDefaultFormBuilder;
     }
 
-    // @todo test_default_form_builder_with_active_record_helpers
-    // @todo test_remote_form_for_with_labelled_builder
-
-    public function testFieldsForWithCustomBuilder()
+    public function testFieldsForWithCustomBuilder(): void
     {
         ob_start();
         $fields = $this->view->fieldsFor('post', $this->post, ['builder' => Builder::class]);
@@ -506,7 +495,7 @@ class FormTest extends Horde_Test_Case
         );
     }
 
-    public function testFormForWithHtmlOptionsAddsOptionsToFormTag()
+    public function testFormForWithHtmlOptionsAddsOptionsToFormTag(): void
     {
         ob_start();
         $form = $this->view->formFor('post', $this->post, ['html' => ['id' => 'some_form',
@@ -519,7 +508,7 @@ class FormTest extends Horde_Test_Case
         );
     }
 
-    public function testFormForWithHiddenField()
+    public function testFormForWithHiddenField(): void
     {
         ob_start();
         $form = $this->view->formFor('post', $this->post);
@@ -534,7 +523,7 @@ class FormTest extends Horde_Test_Case
         $this->assertEquals($expected, ob_get_clean());
     }
 
-    public function testFormForWithFileField()
+    public function testFormForWithFileField(): void
     {
         ob_start();
         $form = $this->view->formFor('post', $this->post);
@@ -548,8 +537,4 @@ class FormTest extends Horde_Test_Case
 
         $this->assertEquals($expected, ob_get_clean());
     }
-
-    // @todo test_form_for_with_string_url_option
-    // @todo test_form_for_with_hash_url_option
-    // @todo test_remote_form_for_with_html_options_adds_options_to_form_tag
 }

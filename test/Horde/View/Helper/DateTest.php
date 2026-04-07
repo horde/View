@@ -1,43 +1,35 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright 2007-2026 Maintainable Software, LLC
  * Copyright 2006-2026 Horde LLC (http://www.horde.org/)
  *
- * @author     Mike Naberezny <mike@maintainable.com>
- * @author     Derek DeVries <derek@maintainable.com>
- * @author     Chuck Hagenbuch <chuck@horde.org>
- * @license    http://www.horde.org/licenses/bsd
- * @category   Horde
- * @package    View
- * @subpackage UnitTests
+ * See the enclosed file LICENSE for license information (LGPL). If you
+ * did not receive this file, see http://www.horde.org/licenses/lgpl21.
  */
 
 namespace Horde\View\Helper;
 
 use Horde_View;
-use Horde_Test_Case;
 use Horde_View_Helper_Date;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\TestCase;
 
-/**
- * @group      view
- * @author     Mike Naberezny <mike@maintainable.com>
- * @author     Derek DeVries <derek@maintainable.com>
- * @author     Chuck Hagenbuch <chuck@horde.org>
- * @license    http://www.horde.org/licenses/bsd
- * @category   Horde
- * @package    View
- * @subpackage UnitTests
- * @coversNothing
- */
-class DateTest extends Horde_Test_Case
+#[Group('view')]
+#[CoversClass(Horde_View_Helper_Date::class)]
+class DateTest extends TestCase
 {
+    private Horde_View_Helper_Date $helper;
+
     public function setUp(): void
     {
         $this->helper = new Horde_View_Helper_Date(new Horde_View());
     }
 
-    public function testDistanceInWords()
+    public function testDistanceInWords(): void
     {
         $from = mktime(21, 45, 0, 6, 6, 2004);
 
@@ -201,9 +193,8 @@ class DateTest extends Horde_Test_Case
         );
     }
 
-    public function testDistanceInWordsWithIntegers()
+    public function testDistanceInWordsWithIntegers(): void
     {
-        // test with integers
         $this->assertEquals(
             'less than a minute',
             $this->helper->distanceOfTimeInWords(59)
@@ -214,5 +205,13 @@ class DateTest extends Horde_Test_Case
             $this->helper->distanceOfTimeInWords(0, 59));
         $this->assertEquals('about 1 hour',
             $this->helper->distanceOfTimeInWords(60 * 60, 0));
+    }
+
+    public function testTimeAgoInWords(): void
+    {
+        // timeAgoInWords wraps distanceOfTimeInWords with time() as second arg
+        // We can verify it returns a string for a recent timestamp
+        $result = $this->helper->timeAgoInWords(time() - 120);
+        $this->assertEquals('2 minutes', $result);
     }
 }
