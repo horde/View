@@ -16,7 +16,7 @@
             "role": "lead"
         }
     ],
-    "time": "2025-05-09",
+    "time": "2026-04-07",
     "repositories": [],
     "require": {
         "php": "^7.4 || ^8",
@@ -45,5 +45,10 @@
     },
     "config": {
         "allow-plugins": {}
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-FRAMEWORK_6_0": "3.x-dev"
+        }
     }
 }
