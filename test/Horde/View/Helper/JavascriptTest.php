@@ -1,7 +1,8 @@
 <?php
+
 /**
- * Copyright 2007 Maintainable Software, LLC
- * Copyright 2006-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2007-2026 Maintainable Software, LLC
+ * Copyright 2006-2026 Horde LLC (http://www.horde.org/)
  *
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Derek DeVries <derek@maintainable.com>
@@ -11,9 +12,12 @@
  * @package    View
  * @subpackage UnitTests
  */
+
 namespace Horde\View\Helper;
-use \Horde_Test_Case;
-use \Horde_View;
+
+use Horde_Test_Case;
+use Horde_View;
+
 /**
  * @group      view
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -23,6 +27,7 @@ use \Horde_View;
  * @category   Horde
  * @package    View
  * @subpackage UnitTests
+ * @coversNothing
  */
 class JavascriptTest extends Horde_Test_Case
 {
@@ -35,8 +40,10 @@ class JavascriptTest extends Horde_Test_Case
 
     public function testJavascriptTag()
     {
-        $this->assertEquals("<script type=\"text/javascript\">\n//<![CDATA[\nfoo = 1;\n//]]>\n</script>",
-                            $this->view->javascriptTag('foo = 1;'));
+        $this->assertEquals(
+            "<script type=\"text/javascript\">\n//<![CDATA[\nfoo = 1;\n//]]>\n</script>",
+            $this->view->javascriptTag('foo = 1;')
+        );
     }
 
 }

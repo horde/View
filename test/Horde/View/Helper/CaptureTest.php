@@ -1,7 +1,8 @@
 <?php
+
 /**
- * Copyright 2007-2008 Maintainable Software, LLC
- * Copyright 2006-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2007-2026 Maintainable Software, LLC
+ * Copyright 2006-2026 Horde LLC (http://www.horde.org/)
  *
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Derek DeVries <derek@maintainable.com>
@@ -11,11 +12,14 @@
  * @package    View
  * @subpackage UnitTests
  */
+
 namespace Horde\View\Helper;
-use \Horde_View;
-use \Horde_View_Helper_Capture;
-use \PHPUnit\Framework\TestCase;
-use \Horde_View_Exception as ViewException;
+
+use Horde_View;
+use Horde_View_Helper_Capture;
+use PHPUnit\Framework\TestCase;
+use Horde_View_Exception as ViewException;
+
 /**
  * @group      view
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -25,6 +29,7 @@ use \Horde_View_Exception as ViewException;
  * @category   Horde
  * @package    View
  * @subpackage UnitTests
+ * @coversNothing
  */
 class CaptureTest extends TestCase
 {

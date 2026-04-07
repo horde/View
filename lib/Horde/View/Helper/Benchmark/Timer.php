@@ -4,8 +4,8 @@
  * An instance of this class is returned by
  * Horde_View_Helper_Benchmark::benchmark().
  *
- * Copyright 2007-2008 Maintainable Software, LLC
- * Copyright 2006-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2007-2026 Maintainable Software, LLC
+ * Copyright 2006-2026 Horde LLC (http://www.horde.org/)
  *
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Derek DeVries <derek@maintainable.com>

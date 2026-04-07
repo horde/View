@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Copyright 2007 Maintainable Software, LLC
- * Copyright 2006-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2007-2026 Maintainable Software, LLC
+ * Copyright 2006-2026 Horde LLC (http://www.horde.org/)
  *
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Derek DeVries <derek@maintainable.com>
@@ -49,7 +49,7 @@ class Horde_View_Helper_Text extends Horde_View_Helper_Base
      */
     public function h($var)
     {
-        return htmlspecialchars((string)$var, ENT_QUOTES, $this->_view->getEncoding());
+        return htmlspecialchars((string) $var, ENT_QUOTES, $this->_view->getEncoding());
     }
 
     /**
@@ -122,8 +122,8 @@ class Horde_View_Helper_Text extends Horde_View_Helper_Base
             $name = 'default';
         }
 
-        if (empty($this->_cycles[$name]) ||
-            $this->_cycles[$name]->getValues() != $values) {
+        if (empty($this->_cycles[$name])
+            || $this->_cycles[$name]->getValues() != $values) {
             $this->_cycles[$name] = new Horde_View_Helper_Text_Cycle($values);
         }
 

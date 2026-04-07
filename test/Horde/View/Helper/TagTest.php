@@ -1,7 +1,8 @@
 <?php
+
 /**
- * Copyright 2007-2008 Maintainable Software, LLC
- * Copyright 2008-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2007-2026 Maintainable Software, LLC
+ * Copyright 2008-2026 Horde LLC (http://www.horde.org/)
  *
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Derek DeVries <derek@maintainable.com>
@@ -11,9 +12,12 @@
  * @package    View
  * @subpackage UnitTests
  */
+
 namespace Horde\View\Helper;
-use \Horde_Test_Case;
-use \Horde_View;
+
+use Horde_Test_Case;
+use Horde_View;
+
 /**
  * @group      view
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -23,6 +27,7 @@ use \Horde_View;
  * @category   Horde
  * @package    View
  * @subpackage UnitTests
+ * @coversNothing
  */
 class TagTest extends Horde_Test_Case
 {
@@ -35,41 +40,53 @@ class TagTest extends Horde_Test_Case
     public function testTag()
     {
         $this->assertEquals('<br />', $this->view->tag('br'));
-        $this->assertEquals('<br clear="left" />',
-                            $this->view->tag('br', array('clear' => 'left')));
+        $this->assertEquals(
+            '<br clear="left" />',
+            $this->view->tag('br', ['clear' => 'left'])
+        );
     }
 
     public function testTagOptions()
     {
-        $this->assertMatchesRegularExpression('/\A<p class="(show|elsewhere)" \\/>\z/',
-                            $this->view->tag('p', array('class' => 'show',
-                                                        'class' => 'elsewhere')));
+        $this->assertMatchesRegularExpression(
+            '/\A<p class="(show|elsewhere)" \\/>\z/',
+            $this->view->tag('p', ['class' => 'show',
+                'class' => 'elsewhere'])
+        );
     }
 
     public function testTagOptionsRejectsNullOption()
     {
-        $this->assertEquals('<p />',
-                            $this->view->tag('p', array('ignored' => null)));
+        $this->assertEquals(
+            '<p />',
+            $this->view->tag('p', ['ignored' => null])
+        );
     }
 
     public function testTagOptionsAcceptsBlankOption()
     {
-        $this->assertEquals('<p included="" />',
-                            $this->view->tag('p', array('included' => '')));
+        $this->assertEquals(
+            '<p included="" />',
+            $this->view->tag('p', ['included' => ''])
+        );
     }
 
     public function testTagOptionsConvertsBooleanOption()
     {
-        $this->assertEquals('<p disabled multiple readonly />',
-                            $this->view->tag('p', array('disabled' => true,
-                                                        'multiple' => true,
-                                                        'readonly' => true)));
+        $this->assertEquals(
+            '<p disabled multiple readonly />',
+            $this->view->tag('p', ['disabled' => true,
+                'multiple' => true,
+                'readonly' => true])
+        );
     }
 
     public function testContentTag()
     {
-        $this->assertEquals('<a href="create">Create</a>',
-                            $this->view->contentTag('a', 'Create', array('href' => 'create')));
+        $this->assertEquals(
+            '<a href="create">Create</a>',
+            $this->view->contentTag('a', 'Create', ['href' => 'create'])
+        );
     }
 
     public function testCdataSection()
@@ -84,19 +101,23 @@ class TagTest extends Horde_Test_Case
 
     public function testDoubleEscapingAttributes()
     {
-        $attributes = array('1&amp;2', '1 &lt; 2', '&#8220;test&#8220;');
+        $attributes = ['1&amp;2', '1 &lt; 2', '&#8220;test&#8220;'];
         foreach ($attributes as $escaped) {
-            $this->assertEquals("<a href=\"$escaped\" />",
-                                $this->view->tag('a', array('href' => $escaped)));
+            $this->assertEquals(
+                "<a href=\"$escaped\" />",
+                $this->view->tag('a', ['href' => $escaped])
+            );
         }
     }
 
     public function testSkipInvalidEscapedAttributes()
     {
-        $attributes = array('&1;', '&#1dfa3;', '& #123;');
+        $attributes = ['&1;', '&#1dfa3;', '& #123;'];
         foreach ($attributes as $escaped) {
-            $this->assertEquals('<a href="' . str_replace('&', '&amp;', $escaped) . '" />',
-                                $this->view->tag('a', array('href' => $escaped)));
+            $this->assertEquals(
+                '<a href="' . str_replace('&', '&amp;', $escaped) . '" />',
+                $this->view->tag('a', ['href' => $escaped])
+            );
         }
     }
 

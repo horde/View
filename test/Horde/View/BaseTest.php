@@ -1,7 +1,8 @@
 <?php
+
 /**
- * Copyright 2007-2008 Maintainable Software, LLC
- * Copyright 2008-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2007-2026 Maintainable Software, LLC
+ * Copyright 2008-2026 Horde LLC (http://www.horde.org/)
  *
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Derek DeVries <derek@maintainable.com>
@@ -11,14 +12,16 @@
  * @package    View
  * @subpackage UnitTests
  */
+
 namespace Horde\View;
-use \Horde_Test_Case as TestCase;
-use \Horde_View;
-use \Horde_View_Helper_Base;
-use \Horde_View_Helper_Text;
-use \Horde_View_Helper_Date;
-use \Horde_View_Exception as ViewException;
-use \Exception as Exception;
+
+use Horde_Test_Case as TestCase;
+use Horde_View;
+use Horde_View_Helper_Base;
+use Horde_View_Helper_Text;
+use Horde_View_Helper_Date;
+use Horde_View_Exception as ViewException;
+use Exception as Exception;
 
 /**
  * @group      view
@@ -29,6 +32,7 @@ use \Exception as Exception;
  * @category   Horde
  * @package    View
  * @subpackage UnitTests
+ * @coversNothing
  */
 class BaseTest extends TestCase
 {
@@ -53,19 +57,19 @@ class BaseTest extends TestCase
 
     public function testAssign()
     {
-        $this->_view->assign(array('publicVar' => 'test'));
+        $this->_view->assign(['publicVar' => 'test']);
         $this->assertEquals('test', $this->_view->publicVar);
     }
 
     public function testAssignDoesntOverridePrivateVariables()
     {
         $this->expectException(ViewException::class);
-        $this->_view->assign(array('_templatePath' => 'test'));
+        $this->_view->assign(['_templatePath' => 'test']);
     }
 
     public function testAssignAllowsUnderscoreVariables()
     {
-        $this->_view->assign(array('_private' => 'test'));
+        $this->_view->assign(['_private' => 'test']);
         $this->assertEquals('test', $this->_view->_private);
     }
 
@@ -87,9 +91,9 @@ class BaseTest extends TestCase
     {
         $this->_view->addTemplatePath('app/views/shared/');
 
-        $expected = array('app/views/shared/',
-                          __DIR__ . '/fixtures/',
-                          './');
+        $expected = ['app/views/shared/',
+            __DIR__ . '/fixtures/',
+            './'];
         $this->assertEquals($expected, $this->_view->getTemplatePaths());
     }
 
@@ -97,9 +101,9 @@ class BaseTest extends TestCase
     public function testAddTemplatePathAddSlash()
     {
         $this->_view->addTemplatePath('app/views/shared');
-        $expected = array('app/views/shared/',
-                          __DIR__ . '/fixtures/',
-                          './');
+        $expected = ['app/views/shared/',
+            __DIR__ . '/fixtures/',
+            './'];
         $this->assertEquals($expected, $this->_view->getTemplatePaths());
     }
 
@@ -159,7 +163,7 @@ class BaseTest extends TestCase
     // test rendering partial with object passed in
     public function testRenderPartialObject()
     {
-        $this->_view->myObject = (object)array('string_value' => 'hello world');
+        $this->_view->myObject = (object) ['string_value' => 'hello world'];
         $expected = '<div><p>hello world</p></div>';
         $this->assertEquals($expected, $this->_view->render('testPartialObject'));
     }
@@ -174,8 +178,8 @@ class BaseTest extends TestCase
     // test rendering partial with collection passed in
     public function testRenderPartialCollection()
     {
-        $this->_view->myObjects = array((object)array('string_value' => 'hello'),
-                                        (object)array('string_value' => 'world'));
+        $this->_view->myObjects = [(object) ['string_value' => 'hello'],
+            (object) ['string_value' => 'world']];
         $expected = '<div><p>hello</p><p>world</p></div>';
         $this->assertEquals($expected, $this->_view->render('testPartialCollection'));
     }
@@ -192,7 +196,7 @@ class BaseTest extends TestCase
     // test rendering partial with empty array as collection
     public function testRenderPartialCollectionEmptyArray()
     {
-        $this->_view->myObjects = array();
+        $this->_view->myObjects = [];
 
         $expected = '<div></div>';
         $this->assertEquals($expected, $this->_view->render('testPartialCollection'));
@@ -201,7 +205,7 @@ class BaseTest extends TestCase
     // partial collection is a model collection
     public function testRenderPartialModelCollection()
     {
-        $this->_view->myObjects = array((object)array('string_value' => 'name a'), (object)array('string_value' => 'name b'));
+        $this->_view->myObjects = [(object) ['string_value' => 'name a'], (object) ['string_value' => 'name b']];
 
         $expected = '<div><p>name a</p><p>name b</p></div>';
         $this->assertEquals($expected, $this->_view->render('testPartialCollection'));

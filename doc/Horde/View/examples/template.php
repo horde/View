@@ -4,7 +4,7 @@
  */
 
 if ($this->books):
-?>
+    ?>
 
 <!-- A table of some books. -->
 <table>

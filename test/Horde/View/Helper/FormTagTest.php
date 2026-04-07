@@ -1,7 +1,8 @@
 <?php
+
 /**
- * Copyright 2007-2008 Maintainable Software, LLC
- * Copyright 2008-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2007-2026 Maintainable Software, LLC
+ * Copyright 2008-2026 Horde LLC (http://www.horde.org/)
  *
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Derek DeVries <derek@maintainable.com>
@@ -11,10 +12,13 @@
  * @package    View
  * @subpackage UnitTests
  */
+
 namespace Horde\View\Helper;
-use \Horde_View;
-use \Horde_Test_Functional;
-use \Horde_View_Helper_Url;
+
+use Horde_View;
+use Horde_Test_Functional;
+use Horde_View_Helper_Url;
+
 /**
  * @group      view
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -24,6 +28,7 @@ use \Horde_View_Helper_Url;
  * @category   Horde
  * @package    View
  * @subpackage UnitTests
+ * @coversNothing
  */
 class FormTagTest extends Horde_Test_Functional
 {
@@ -51,14 +56,14 @@ class FormTagTest extends Horde_Test_Functional
 
     public function testFormTagMultipart()
     {
-        $actual   = $this->view->formTag(array(), array('multipart' => true));
+        $actual   = $this->view->formTag([], ['multipart' => true]);
         $expected = '<form action="http://www.example.com" enctype="multipart/form-data" method="post">';
         $this->assertEquals($expected, $actual);
     }
 
     public function testFormTagWithMethod()
     {
-        $actual   = $this->view->formTag(array(), array('method' => 'put'));
+        $actual   = $this->view->formTag([], ['method' => 'put']);
         $expected = '<form action="http://www.example.com" method="post"><div style="margin:0;padding:0"><input name="_method" type="hidden" value="put" /></div>';
         $this->assertEquals($expected, $actual);
     }
@@ -123,14 +128,14 @@ class FormTagTest extends Horde_Test_Functional
 
     public function testTextAreaTagSizeString()
     {
-        $actual   = $this->view->textAreaTag('body', 'hello world', array('size' => '20x40'));
+        $actual   = $this->view->textAreaTag('body', 'hello world', ['size' => '20x40']);
         $expected = '<textarea cols="20" id="body" name="body" rows="40">hello world</textarea>';
         $this->assertHtmlDomEquals($expected, $actual);
     }
 
     public function testTextAreaTagShouldDisregardSizeIfGivenAsAnInteger()
     {
-        $actual   = $this->view->textAreaTag('body', 'hello world', array('size' => 20));
+        $actual   = $this->view->textAreaTag('body', 'hello world', ['size' => 20]);
         $expected = '<textarea id="body" name="body">hello world</textarea>';
         $this->assertHtmlDomEquals($expected, $actual);
     }
@@ -144,30 +149,38 @@ class FormTagTest extends Horde_Test_Functional
 
     public function testTextFieldTagClassString()
     {
-        $actual   = $this->view->textFieldTag('title', 'Hello!', array('class' => 'admin'));
+        $actual   = $this->view->textFieldTag('title', 'Hello!', ['class' => 'admin']);
         $expected = '<input class="admin" id="title" name="title" type="text" value="Hello!" />';
         $this->assertHtmlDomEquals($expected, $actual);
     }
 
     public function testBooleanOptions()
     {
-        $this->assertHtmlDomEquals('<input checked="checked" disabled="disabled" id="admin" name="admin" readonly="readonly" type="checkbox" value="1" />',
-                               $this->view->checkBoxTag("admin", 1, true, array('disabled' => true, 'readonly' => "yes")));
+        $this->assertHtmlDomEquals(
+            '<input checked="checked" disabled="disabled" id="admin" name="admin" readonly="readonly" type="checkbox" value="1" />',
+            $this->view->checkBoxTag("admin", 1, true, ['disabled' => true, 'readonly' => "yes"])
+        );
 
-        $this->assertHtmlDomEquals('<input checked="checked" id="admin" name="admin" type="checkbox" value="1" />',
-                               $this->view->checkBoxTag('admin', 1, true, array('disabled' => false, 'readonly' => null)));
+        $this->assertHtmlDomEquals(
+            '<input checked="checked" id="admin" name="admin" type="checkbox" value="1" />',
+            $this->view->checkBoxTag('admin', 1, true, ['disabled' => false, 'readonly' => null])
+        );
 
-        $this->assertHtmlDomEquals('<select id="people" multiple="multiple" name="people"><option>david</option></select>',
-                               $this->view->selectTag('people', '<option>david</option>', array('multiple' => true)));
+        $this->assertHtmlDomEquals(
+            '<select id="people" multiple="multiple" name="people"><option>david</option></select>',
+            $this->view->selectTag('people', '<option>david</option>', ['multiple' => true])
+        );
 
-        $this->assertHtmlDomEquals('<select id="people" name="people"><option>david</option></select>',
-                               $this->view->selectTag('people', '<option>david</option>', array('multiple' => null)));
+        $this->assertHtmlDomEquals(
+            '<select id="people" name="people"><option>david</option></select>',
+            $this->view->selectTag('people', '<option>david</option>', ['multiple' => null])
+        );
     }
 
     public function testSubmitTag()
     {
         $expected = '<input name="commit" onclick="this.setAttribute(\'originalValue\', this.value);this.disabled=true;this.value=\'Saving...\';alert(\'hello!\');result = (this.form.onsubmit ? (this.form.onsubmit() ? this.form.submit() : false) : this.form.submit());if (result == false) { this.value = this.getAttribute(\'originalValue\'); this.disabled = false };return result" type="submit" value="Save" />';
-        $actual   = $this->view->submitTag('Save', array('disableWith' => 'Saving...', 'onclick' => "alert('hello!')"));
+        $actual   = $this->view->submitTag('Save', ['disableWith' => 'Saving...', 'onclick' => "alert('hello!')"]);
         $this->assertHtmlDomEquals($expected, $actual);
     }
 
@@ -175,7 +188,7 @@ class FormTagTest extends Horde_Test_Functional
 
 class Horde_View_Helper_FormTagTest_MockUrlHelper extends Horde_View_Helper_Url
 {
-    public function urlFor($first = array(), $second = array())
+    public function urlFor($first = [], $second = [])
     {
         return $first ? parent::urlFor($first, $second) : 'http://www.example.com';
     }

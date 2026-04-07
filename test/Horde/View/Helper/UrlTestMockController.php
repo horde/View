@@ -1,14 +1,14 @@
 <?php
+
 namespace Horde\View\Helper;
-use \Horde_Controller_Base as Base;
-use \Horde_Controller_Request;
-use \Horde_Controller_Response;
+
+use Horde_Controller_Base as Base;
+use Horde_Controller_Request;
+use Horde_Controller_Response;
 
 class UrlTestMockController extends Base
 {
-    public function processRequest(Horde_Controller_Request $request, Horde_Controller_Response $response)
-    {
-    }
+    public function processRequest(Horde_Controller_Request $request, Horde_Controller_Response $response) {}
 
     public function getUrlWriter()
     {

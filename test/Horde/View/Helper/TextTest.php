@@ -1,7 +1,8 @@
 <?php
+
 /**
- * Copyright 2007-2008 Maintainable Software, LLC
- * Copyright 2008-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2007-2026 Maintainable Software, LLC
+ * Copyright 2008-2026 Horde LLC (http://www.horde.org/)
  *
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Derek DeVries <derek@maintainable.com>
@@ -11,11 +12,13 @@
  * @package    View
  * @subpackage UnitTests
  */
+
 namespace Horde\View\Helper;
-use \Horde_Test_Case;
-use \Horde_View;
-use \Horde_View_Helper_Text_Cycle;
-use \InvalidArgumentException;
+
+use Horde_Test_Case;
+use Horde_View;
+use Horde_View_Helper_Text_Cycle;
+use InvalidArgumentException;
 
 /**
  * @group      view
@@ -26,6 +29,7 @@ use \InvalidArgumentException;
  * @category   Horde
  * @package    View
  * @subpackage UnitTests
+ * @coversNothing
  */
 class TextTest extends Horde_Test_Case
 {
@@ -93,16 +97,16 @@ class TextTest extends Horde_Test_Case
 
     public function testCycleClass()
     {
-        $value = new Horde_View_Helper_Text_Cycle(array('one', 2, '3'));
+        $value = new Horde_View_Helper_Text_Cycle(['one', 2, '3']);
 
-        $this->assertEquals('one', (string)$value);
-        $this->assertEquals('2',   (string)$value);
-        $this->assertEquals('3',   (string)$value);
-        $this->assertEquals('one', (string)$value);
+        $this->assertEquals('one', (string) $value);
+        $this->assertEquals('2', (string) $value);
+        $this->assertEquals('3', (string) $value);
+        $this->assertEquals('one', (string) $value);
         $value->reset();
-        $this->assertEquals('one', (string)$value);
-        $this->assertEquals('2',   (string)$value);
-        $this->assertEquals('3',   (string)$value);
+        $this->assertEquals('one', (string) $value);
+        $this->assertEquals('2', (string) $value);
+        $this->assertEquals('3', (string) $value);
     }
 
     public function testCycleClassWithInvalidArguments()
@@ -111,46 +115,46 @@ class TextTest extends Horde_Test_Case
         $value = new Horde_View_Helper_Text_Cycle('bad');
 
         $this->expectException(InvalidArgumentException::class);
-        $value = new Horde_View_Helper_Text_Cycle(array('foo'));
+        $value = new Horde_View_Helper_Text_Cycle(['foo']);
 
         $this->expectException(InvalidArgumentException::class);
 
-        $value = new Horde_View_Helper_Text_Cycle(array('foo', 'bar'), 'bad-arg');
+        $value = new Horde_View_Helper_Text_Cycle(['foo', 'bar'], 'bad-arg');
     }
 
     public function testCycleResetsWithNewValues()
     {
-        $this->assertEquals('even', (string)$this->view->cycle('even', 'odd'));
-        $this->assertEquals('odd',  (string)$this->view->cycle('even', 'odd'));
-        $this->assertEquals('even', (string)$this->view->cycle('even', 'odd'));
-        $this->assertEquals('1',    (string)$this->view->cycle(1, 2, 3));
-        $this->assertEquals('2',    (string)$this->view->cycle(1, 2, 3));
-        $this->assertEquals('3',    (string)$this->view->cycle(1, 2, 3));
+        $this->assertEquals('even', (string) $this->view->cycle('even', 'odd'));
+        $this->assertEquals('odd', (string) $this->view->cycle('even', 'odd'));
+        $this->assertEquals('even', (string) $this->view->cycle('even', 'odd'));
+        $this->assertEquals('1', (string) $this->view->cycle(1, 2, 3));
+        $this->assertEquals('2', (string) $this->view->cycle(1, 2, 3));
+        $this->assertEquals('3', (string) $this->view->cycle(1, 2, 3));
     }
 
     public function testNamedCycles()
     {
-        $this->assertEquals('1',    (string)$this->view->cycle(1, 2, 3, array('name' => 'numbers')));
-        $this->assertEquals('red',  (string)$this->view->cycle('red', 'blue', array('name' => 'colors')));
-        $this->assertEquals('2',    (string)$this->view->cycle(1, 2, 3, array('name' => 'numbers')));
-        $this->assertEquals('blue', (string)$this->view->cycle('red', 'blue', array('name' => 'colors')));
-        $this->assertEquals('3',    (string)$this->view->cycle(1, 2, 3, array('name' => 'numbers')));
-        $this->assertEquals('red',  (string)$this->view->cycle('red', 'blue', array('name' => 'colors')));
+        $this->assertEquals('1', (string) $this->view->cycle(1, 2, 3, ['name' => 'numbers']));
+        $this->assertEquals('red', (string) $this->view->cycle('red', 'blue', ['name' => 'colors']));
+        $this->assertEquals('2', (string) $this->view->cycle(1, 2, 3, ['name' => 'numbers']));
+        $this->assertEquals('blue', (string) $this->view->cycle('red', 'blue', ['name' => 'colors']));
+        $this->assertEquals('3', (string) $this->view->cycle(1, 2, 3, ['name' => 'numbers']));
+        $this->assertEquals('red', (string) $this->view->cycle('red', 'blue', ['name' => 'colors']));
     }
 
     public function testDefaultNamedCycle()
     {
-        $this->assertEquals('1', (string)$this->view->cycle(1, 2, 3));
-        $this->assertEquals('2', (string)$this->view->cycle(1, 2, 3, array('name' => 'default')));
-        $this->assertEquals('3', (string)$this->view->cycle(1, 2, 3));
+        $this->assertEquals('1', (string) $this->view->cycle(1, 2, 3));
+        $this->assertEquals('2', (string) $this->view->cycle(1, 2, 3, ['name' => 'default']));
+        $this->assertEquals('3', (string) $this->view->cycle(1, 2, 3));
     }
 
     public function testResetCycle()
     {
-        $this->assertEquals('1', (string)$this->view->cycle(1, 2, 3));
-        $this->assertEquals('2', (string)$this->view->cycle(1, 2, 3));
+        $this->assertEquals('1', (string) $this->view->cycle(1, 2, 3));
+        $this->assertEquals('2', (string) $this->view->cycle(1, 2, 3));
         $this->view->resetCycle();
-        $this->assertEquals('1', (string)$this->view->cycle(1, 2, 3));
+        $this->assertEquals('1', (string) $this->view->cycle(1, 2, 3));
     }
 
     public function testResetUnknownCycle()
@@ -161,24 +165,24 @@ class TextTest extends Horde_Test_Case
 
     public function testResetNamedCycle()
     {
-        $this->assertEquals('1',    (string)$this->view->cycle(1, 2, 3, array('name' => 'numbers')));
-        $this->assertEquals('red',  (string)$this->view->cycle('red', 'blue', array('name' => 'colors')));
+        $this->assertEquals('1', (string) $this->view->cycle(1, 2, 3, ['name' => 'numbers']));
+        $this->assertEquals('red', (string) $this->view->cycle('red', 'blue', ['name' => 'colors']));
         $this->view->resetCycle('numbers');
-        $this->assertEquals('1',    (string)$this->view->cycle(1, 2, 3, array('name' => 'numbers')));
-        $this->assertEquals('blue', (string)$this->view->cycle('red', 'blue', array('name' => 'colors')));
-        $this->assertEquals('2',    (string)$this->view->cycle(1, 2, 3, array('name' => 'numbers')));
-        $this->assertEquals('red',  (string)$this->view->cycle('red', 'blue', array('name' => 'colors')));
+        $this->assertEquals('1', (string) $this->view->cycle(1, 2, 3, ['name' => 'numbers']));
+        $this->assertEquals('blue', (string) $this->view->cycle('red', 'blue', ['name' => 'colors']));
+        $this->assertEquals('2', (string) $this->view->cycle(1, 2, 3, ['name' => 'numbers']));
+        $this->assertEquals('red', (string) $this->view->cycle('red', 'blue', ['name' => 'colors']));
     }
 
     public function testPluralization()
     {
-        $this->assertEquals('1 count',  $this->view->pluralize(1, 'count'));
+        $this->assertEquals('1 count', $this->view->pluralize(1, 'count'));
         $this->assertEquals('2 counts', $this->view->pluralize(2, 'count'));
-        $this->assertEquals('1 count',  $this->view->pluralize('1', 'count'));
+        $this->assertEquals('1 count', $this->view->pluralize('1', 'count'));
         $this->assertEquals('2 counts', $this->view->pluralize('2', 'count'));
         $this->assertEquals('1,066 counts', $this->view->pluralize('1,066', 'count'));
-        $this->assertEquals('1.25 counts',  $this->view->pluralize('1.25', 'count'));
-        $this->assertEquals('2 counters',   $this->view->pluralize('2', 'count', 'counters'));
+        $this->assertEquals('1.25 counts', $this->view->pluralize('1.25', 'count'));
+        $this->assertEquals('2 counters', $this->view->pluralize('2', 'count', 'counters'));
     }
 
 }

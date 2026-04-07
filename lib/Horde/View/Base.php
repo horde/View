@@ -180,8 +180,8 @@ abstract class Horde_View_Base extends stdClass
     public function addHelper($helper)
     {
         if (is_string($helper)) {
-            if (strpos($helper, '_') === false &&
-                strpos($helper, 'Helper') === false) {
+            if (strpos($helper, '_') === false
+                && strpos($helper, 'Helper') === false) {
                 $class = 'Horde_View_Helper_' . $helper;
             } else {
                 $class = $helper;
@@ -298,9 +298,9 @@ abstract class Horde_View_Base extends stdClass
         }
 
         // Set local variables to be used in the partial.
-        if (isset($options['locals']) &&
-            (is_array($options['locals']) ||
-             $options['locals'] instanceof Traversable)) {
+        if (isset($options['locals'])
+            && (is_array($options['locals'])
+             || $options['locals'] instanceof Traversable)) {
             foreach ($options['locals'] as $key => $val) {
                 $locals[$key] = $val;
             }

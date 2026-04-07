@@ -1,1 +1,1 @@
-<div><?php echo $this->renderPartial('myPartialObject', array('collection' => $this->myObjects)) ?></div>
+<div><?php echo $this->renderPartial('myPartialObject', ['collection' => $this->myObjects]) ?></div>

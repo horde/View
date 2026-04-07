@@ -4,8 +4,8 @@
  * Measures the execution time of a block in a template and reports the result
  * to the log.
  *
- * Copyright 2007-2008 Maintainable Software, LLC
- * Copyright 2006-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2007-2026 Maintainable Software, LLC
+ * Copyright 2006-2026 Horde LLC (http://www.horde.org/)
  *
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Derek DeVries <derek@maintainable.com>
