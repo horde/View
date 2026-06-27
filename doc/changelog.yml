@@ -1,4 +1,14 @@
 ---
+3.0.0:
+  api: 3.0.0
+  state:
+    release: stable
+    api: stable
+  date: 2026-06-27
+  license:
+    identifier: LGPL-2.1-only
+    uri: https://spdx.org/licenses/LGPL-2.1-only.html
+  notes: "chore: refresh qc fixes and platform deps\nchore: Update workflow dependency"
 3.0.0-beta1:
   api: 3.0.0-beta1
   state:
@@ -8,9 +18,7 @@
   license:
     identifier: LGPL-2.1-only
     uri: https://spdx.org/licenses/LGPL-2.1-only.html
-  notes: |-
-    chore(gitignore): Add missing default entries
-    style: php-cs-fixer
+  notes: "chore(gitignore): Add missing default entries\nstyle: php-cs-fixer"
 3.0.0-alpha6:
   api: 3.0.0-alpha1
   state:
@@ -20,9 +28,7 @@
   license:
     identifier: LGPL-2.1-only
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    fix: Horde_View_Helper_Text should try to convert primitives to string before passing to htmlspecialchars()
-    style: apply php-cs-fixer
+  notes: "fix: Horde_View_Helper_Text should try to convert primitives to string before passing to htmlspecialchars()\nstyle: apply php-cs-fixer\n"
 3.0.0-alpha5:
   api: 3.0.0-alpha1
   state:
@@ -32,8 +38,7 @@
   license:
     identifier: LGPL-2.1-only
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    fix: Horde_View_Base is inherently a Value Object. Remove foreign public properties and make it an stdClass
+  notes: "fix: Horde_View_Base is inherently a Value Object. Remove foreign public properties and make it an stdClass\n"
 3.0.0-alpha4:
   api: 3.0.0alpha1
   state:
@@ -43,10 +48,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    Original version string was 3.0.0alpha4
-    [rla] Applied minor return type fixes.
-    |+
+  notes: "Original version string was 3.0.0alpha4\n[rla] Applied minor return type fixes.\n|+\n"
 3.0.0-alpha3:
   api: 3.0.0alpha1
   state:
@@ -56,9 +58,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |-
-    Original version string was 3.0.0alpha3
-    |+
+  notes: "Original version string was 3.0.0alpha3\n|+"
 3.0.0-alpha2:
   api: 3.0.0alpha1
   state:
@@ -68,9 +68,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |-
-    Original version string was 3.0.0alpha2
-    |+
+  notes: "Original version string was 3.0.0alpha2\n|+"
 3.0.0-alpha1:
   api: 3.0.0alpha1
   state:
@@ -80,8 +78,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    Original version string was 3.0.0alpha1
+  notes: "Original version string was 3.0.0alpha1\n"
 2.0.6:
   api: 1.1.0
   state:
@@ -91,8 +88,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [jan] Mark PHP 7 as supported.
+  notes: "[jan] Mark PHP 7 as supported.\n"
 2.0.5:
   api: 1.1.0
   state:
@@ -102,8 +98,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [jan] Fix issues with certain locales like Turkish.
+  notes: "[jan] Fix issues with certain locales like Turkish.\n"
 2.0.4:
   api: 1.1.0
   state:
@@ -113,9 +108,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [jan] Change Horde_View_Helper_Date#distanceOfTimeInWords() to not round up the distance.
-    [jan] Make Horde_View_Helper_Text#truncate() and truncateMiddle() multibyte-safe (Bug #13163).
+  notes: "[jan] Change Horde_View_Helper_Date#distanceOfTimeInWords() to not round up the distance.\n[jan] Make Horde_View_Helper_Text#truncate() and truncateMiddle() multibyte-safe (Bug #13163).\n"
 2.0.3:
   api: 1.1.0
   state:
@@ -125,8 +118,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [jan] Allow collections with arbitrary keys when rendering partials.
+  notes: "[jan] Allow collections with arbitrary keys when rendering partials.\n"
 2.0.2:
   api: 1.1.0
   state:
@@ -136,8 +128,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [jan] Fix generating form tags.
+  notes: "[jan] Fix generating form tags.\n"
 2.0.1:
   api: 1.1.0
   state:
@@ -147,33 +138,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [mms] Use new Horde_Test layout.
-2.0.0-beta1:
-  api: 1.1.0
-  state:
-    release: beta
-    api: stable
-  date: 2012-07-19
-  license:
-    identifier: LGPL-2.1
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    Original version string was 2.0.0beta1
-    First beta release for Horde 5.
-2.0.0-alpha1:
-  api: 1.1.0
-  state:
-    release: alpha
-    api: stable
-  date: 2012-07-06
-  license:
-    identifier: LGPL-2.1
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    Original version string was 2.0.0alpha1
-    First alpha release for Horde 5.
-    [mms] Added Horde_View_Helper_FormTag#optionTag().
+  notes: "[mms] Use new Horde_Test layout.\n"
 2.0.0:
   api: 1.1.0
   state:
@@ -183,8 +148,27 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    First stable release for Horde 5.
+  notes: "First stable release for Horde 5.\n"
+2.0.0-beta1:
+  api: 1.1.0
+  state:
+    release: beta
+    api: stable
+  date: 2012-07-19
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "Original version string was 2.0.0beta1\nFirst beta release for Horde 5.\n"
+2.0.0-alpha1:
+  api: 1.1.0
+  state:
+    release: alpha
+    api: stable
+  date: 2012-07-06
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "Original version string was 2.0.0alpha1\nFirst alpha release for Horde 5.\n[mms] Added Horde_View_Helper_FormTag#optionTag().\n"
 1.0.1:
   api: 1.0.0
   state:
@@ -194,56 +178,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [jan] Make unit tests Windows compatible.
-1.0.0-beta1:
-  api: 1.0.0
-  state:
-    release: beta
-    api: beta
-  date: 2011-03-16
-  license:
-    identifier: LGPL-2.1
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    Original version string was 1.0.0beta1
-    First beta release for Horde 4.
-1.0.0-alpha1:
-  api: 1.0.0
-  state:
-    release: alpha
-    api: alpha
-  date: 2011-03-08
-  license:
-    identifier: LGPL-2.1
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    Original version string was 1.0.0alpha1
-    First alpha release for Horde 4.
-1.0.0-RC2:
-  api: 1.0.0
-  state:
-    release: beta
-    api: beta
-  date: 2011-03-29
-  license:
-    identifier: LGPL-2.1
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    Original version string was 1.0.0RC2
-    Second release candidate for Horde 4.
-1.0.0-RC1:
-  api: 1.0.0
-  state:
-    release: beta
-    api: beta
-  date: 2011-03-22
-  license:
-    identifier: LGPL-2.1
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    Original version string was 1.0.0RC1
-    First release candidate for Horde 4.
+  notes: "[jan] Make unit tests Windows compatible.\n"
 1.0.0:
   api: 1.0.0
   state:
@@ -253,8 +188,47 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    First stable release for Horde 4.
+  notes: "First stable release for Horde 4.\n"
+1.0.0-RC2:
+  api: 1.0.0
+  state:
+    release: beta
+    api: beta
+  date: 2011-03-29
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "Original version string was 1.0.0RC2\nSecond release candidate for Horde 4.\n"
+1.0.0-RC1:
+  api: 1.0.0
+  state:
+    release: beta
+    api: beta
+  date: 2011-03-22
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "Original version string was 1.0.0RC1\nFirst release candidate for Horde 4.\n"
+1.0.0-beta1:
+  api: 1.0.0
+  state:
+    release: beta
+    api: beta
+  date: 2011-03-16
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "Original version string was 1.0.0beta1\nFirst beta release for Horde 4.\n"
+1.0.0-alpha1:
+  api: 1.0.0
+  state:
+    release: alpha
+    api: alpha
+  date: 2011-03-08
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "Original version string was 1.0.0alpha1\nFirst alpha release for Horde 4.\n"
 0.2.1:
   api: 0.2.0
   state:
@@ -264,5 +238,4 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    Better Helper architecture, improved View/Helper registration
+  notes: "Better Helper architecture, improved View/Helper registration\n"
