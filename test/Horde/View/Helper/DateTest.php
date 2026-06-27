@@ -208,11 +208,17 @@ class DateTest extends Horde_Test_Case
             'less than a minute',
             $this->helper->distanceOfTimeInWords(59)
         );
-        $this->assertEquals('about 1 hour',
-            $this->helper->distanceOfTimeInWords(60 * 60));
-        $this->assertEquals('less than a minute',
-            $this->helper->distanceOfTimeInWords(0, 59));
-        $this->assertEquals('about 1 hour',
-            $this->helper->distanceOfTimeInWords(60 * 60, 0));
+        $this->assertEquals(
+            'about 1 hour',
+            $this->helper->distanceOfTimeInWords(60 * 60)
+        );
+        $this->assertEquals(
+            'less than a minute',
+            $this->helper->distanceOfTimeInWords(0, 59)
+        );
+        $this->assertEquals(
+            'about 1 hour',
+            $this->helper->distanceOfTimeInWords(60 * 60, 0)
+        );
     }
 }
